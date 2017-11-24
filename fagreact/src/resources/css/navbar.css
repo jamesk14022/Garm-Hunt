@@ -1,0 +1,14 @@
+
+    @font-face{
+      font-family: Couture;
+      src: url("../fonts/couture-bld.otf") format("opentype");
+      font-weight: 200;
+    }
+
+a.navbar-brand{
+	font-family: Couture;
+}
+
+ul.navbar-nav{
+	font-family: Couture;
+}

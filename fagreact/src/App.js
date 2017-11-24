@@ -1,0 +1,17 @@
+import React from 'react';
+import { Switch, Route} from 'react-router-dom';
+import Header from './Header';
+import Home from './Home';
+import Outfit from './Outfit';
+
+const App = () => (
+  <div>
+    <Header />
+    <Switch>
+      <Route exact path='/' component={Home}/>
+      <Route path='/outfit' component={Outfit}/>
+    </Switch>
+  </div>
+)
+
+export default App

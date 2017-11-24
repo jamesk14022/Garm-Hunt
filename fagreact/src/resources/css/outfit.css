@@ -1,0 +1,93 @@
+.main-content{
+	padding-top: 100px;
+}
+#gallery{
+	background-color: #FFCCCB;
+	height: 500px;
+	background-size: auto;
+}
+
+#item-details{
+	position: relative;
+	border-top: 2px solid grey;
+	width: 100%;
+	height: 250px;
+}
+
+#item-details h2{
+	position: absolute;
+	left: 0px;
+}
+
+#item-details h3{
+	position: absolute;
+	right: 0px;
+}
+
+#item-details ul{
+	position: absolute;
+	top: 100px;
+	font-size: 20px;
+}
+
+#item-misc{
+	position: relative;
+	border-bottom: 2px solid grey;
+	height: 250px;
+}
+
+#purchase button{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+
+#social{
+	position: absolute;
+	bottom: 0px;
+	right: 5px;
+}
+
+.social-buttons{
+	
+	display: inline;
+	font-size: 32px;
+	margin-left: 20px;
+}
+
+
+h1{
+
+	margin-top: 100px;
+}
+
+.fash-item{
+	background-size: contain;
+	height: 300px;
+	padding: 30px;
+	background: url('/imgs/shoe.jpg');
+}
+
+.fash-item-info{
+	position: relative;
+}
+
+.fash-item-info p:first-child{
+	margin-top: 10px;
+
+}
+
+.fash-item-info p:first-child + p{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
+
+.fash-item-info p:first-child, .fash-item-info p:first-child + p + p{
+	margin-left: 5px;
+}
+
+.suggested-items{
+	margin-top: 60px;
+	
+}
