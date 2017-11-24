@@ -8,7 +8,7 @@ return (
 <div className="Header">
   <Helmet>
     <title>Correct_Couture</title>
-    <link rel="canonical" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   </Helmet>
   <nav className="navbar navbar-default">
   <div className="container-fluid">
