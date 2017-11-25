@@ -21,26 +21,10 @@ return (
       </button>
       <a className="navbar-brand" href="index.php">Correct_Couture</a>
     </div>
-
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
-        <li className="dropdown">
-          <a href="" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span className="caret"></span></a>
-          <ul className="dropdown-menu">
-            <li><a href="index.php/items/index/Tommy%20Hilfiger">Tommy Hilfiger</a></li>
-            <li><a href="index.php/items/index/Lacoste">Lacoste</a></li>
-            <li><a href="index.php/items/index/Ralph%20Lauren">RL</a></li>
-            
-          </ul>
-        </li>
-        <li className="dropdown">
-          <a href="" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tags<span className="caret"></span></a>
-          <ul className="dropdown-menu">
-            <li><a href="index.php/items/index/retail">Retail</a></li>
-            <li><a href="index.php/items/index/one%20off">One Off</a></li>
-            <li><a href="index.php/items/index/drops">New Drops</a></li>
-          </ul>
-        </li>
+        <li><a href="">Women</a></li>
+        <li><a href="">Men</a></li>
       </ul>
 
       <ul className="nav navbar-nav navbar-right">
@@ -51,8 +35,8 @@ return (
   </div>
 </nav>
 </div>
-    );
-  }
+);
+}
 }
 
 export default Header;
