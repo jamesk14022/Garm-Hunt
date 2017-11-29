@@ -1,9 +1,19 @@
 function getOutfit(id){
-  return fetch(`/outfits/` + id, {
-    accept: "application/json"
-  })
+  return fetch(`http://localhost:5000/api/outfits/` + id);
   //could implement callback here or .then()
 }
 
-const Client = { getOutfit };
+function postOutfit(outfit){
+	var formData  = new FormData();
+	for(var name in outfit) {
+		formData.append(name, outfit[name]);
+	}
+
+	return fetch(`http://localhost:5000/api/outfit`, {
+	method: 'POST',
+	body: formData
+});
+}
+
+const Client = { getOutfit, postOutfit };
 export default Client
