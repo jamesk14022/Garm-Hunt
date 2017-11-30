@@ -6,6 +6,17 @@
 	background-color: #dbdbdb;
 }
 
+img.img-item{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+hr.home-division{
+	margin-top: 70px;
+	margin-bottom: 10px;
+}
+
 .fash-item{
 	background-size: cover;
 	height: 300px;
@@ -102,4 +113,8 @@ input.forn-control{
 div.col-lg-12{
 	padding: 0px;
 	margin-bottom: 30px;
+}
+
+div.col-md-2{
+	padding: 0px;
 }

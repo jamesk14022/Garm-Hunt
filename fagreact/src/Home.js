@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Client from './Client.js';
 import './resources/css/home.css';
 
 class Home extends Component {
+constructor(props){
+  super(props);
+  this.state = { 'editorOutfits': [] }
+}
+
+componentDidMount(){
+  Client.getRandomOutfits(1)
+    .then(response => response.json())
+      .then((body) => {
+        console.log(body);
+        this.setState({ 'editorOutfits': body });
+    });
+}
+
 render() {
 return (
 <div className="Home">
@@ -18,59 +33,31 @@ return (
         <button className="btn btn-default" type="button">Go!</button>
       </span>
     </div>
-</div>
+</div.
 
-  <hr />
+</div>
 
   <h3>Editor's Picks</h3>
 
   <div className="row">
-
-    <Link to={`/outfit/123`} >
+  {this.state.editorOutfits.map(function(item){
+    return (
+    <div className="dynamicItem">
+      <Link to={`/outfit/` + item._id} >
       <div className="col-md-2">
-        <div className="editor-item">
+      <div className="editor-item">
+        <img className="img-responsive img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64} />
         <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
       </div>
       </div>
     </Link>
-    <a href="">
-      <div className="col-md-2">
-        <div className="editor-item">
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-      </div>
-      </div>
-    </a>
-    <a href="">
-      <div className="col-md-2">
-        <div className="editor-item">
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-      </div>
-      </div>
-    </a>
-    <a href="">
-      <div className="col-md-2">
-        <div className="editor-item">
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-      </div>
-      </div>
-    </a>
-    <a href="">
-      <div className="col-md-2">
-        <div className="editor-item">
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-      </div>
-      </div>
-    </a>
-    <a href="">
-      <div className="col-md-2">
-        <div className="editor-item">
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-      </div>
-      </div>
-    </a>
+    </div>
+    );
+  }, this)}
+    
   </div>
 
-  <hr />
+  <hr className="home-division"/>
 
   <div className="row">
   <div className="col-md-6"><div className="feature"><h3>Palace x Adidas<span className="spacer"></span></h3></div></div>
@@ -171,7 +158,7 @@ return (
   </div>
 </div>
 </div>
-</div>
+
     );
   }
 }

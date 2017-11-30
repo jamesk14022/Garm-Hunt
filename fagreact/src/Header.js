@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import './resources/css/navbar.css';
 
 class Header extends Component {
@@ -19,7 +20,8 @@ return (
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
       </button>
-      <a className="navbar-brand" href="index.php">Correct_Couture</a>
+      <Link className="navbar-brand" to={`/`} >Correct_Couture</Link>
+
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
@@ -28,7 +30,7 @@ return (
       </ul>
 
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="">Submit an Item</a></li>
+        <li><Link to={`/submit`} >Submit an Outfit</Link></li>
          <li><a href="">Login/Reg</a></li>
       </ul>
     </div>

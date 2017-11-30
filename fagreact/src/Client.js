@@ -1,6 +1,15 @@
 function getOutfit(id){
   return fetch(`http://localhost:5000/api/outfits/` + id);
-  //could implement callback here or .then()
+}
+
+
+function getRandomOutfits(limit){
+	let data = {
+		limit: limit
+	}
+	return fetch(`http://localhost:5000/api/outfits/`, {
+		body: data 
+	});
 }
 
 function postOutfit(outfit){
@@ -12,8 +21,8 @@ function postOutfit(outfit){
 	return fetch(`http://localhost:5000/api/outfit`, {
 	method: 'POST',
 	body: formData
-});
+	});
 }
 
-const Client = { getOutfit, postOutfit };
+const Client = { getOutfit, getRandomOutfits, postOutfit };
 export default Client

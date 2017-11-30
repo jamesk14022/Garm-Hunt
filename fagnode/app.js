@@ -13,7 +13,7 @@ var upload = multer({ dest: 'upload/'});
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/agg');
-
+var shortid = require('shortid');
 
 var path = require('path');
 var fs = require('fs');
@@ -26,11 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type : 'application/vnd.api+json'}));
 
 var outfitSchema = new mongoose.Schema({
-	id: String, //alphanumeric??
+	_id: { type: String, 'default': shortid.generate },
 	author: String,
 	date: Date,
 	images: [{ data: Buffer, contentType: String }],
-	items: [{ url: String }],
+	items: [{ name: String, url: String }],
+	tags: [{ tag: String }],
+	features: [{ tag: String}],
 	model: { name: String, url: String}
 });
 
@@ -40,9 +42,7 @@ var Outfit = mongoose.model('Outfit', outfitSchema);
 
 //get specific outfit based on Id
 app.get('/api/outfits/:outfitId', function(req, res){
-
-	console.log('params route hit');
-	Outfit.find({ id: req.params.outfitId }).lean().exec(function(err, outfit){
+	Outfit.find({ _id: req.params.outfitId }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		outfit[0].images[0]['base64'] = outfit[0].images[0].data.toString('base64');
 		res.json(outfit[0]);
@@ -52,21 +52,33 @@ app.get('/api/outfits/:outfitId', function(req, res){
 
 //delivers a number of outfits, defaulting to 1
 app.get('/api/outfits', function(req, res){
-	console.log('non routeparams route');
 	let limit = parseInt(req.body.limit) || 1;
+	Outfit.find().limit(limit).lean().exec(function(err, outfit){
+		if (err) return console.log(err);
+		outfit[0].images[0]['base64'] = outfit[0].images[0].data.toString('base64');
+		res.json(outfit);
+	}
+	);
 });
 
 app.post('/api/outfit', upload.single('image'), function(req, res){
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
 
+	//decode json string of items(json'd bc it has to be transferred as multipart)
+	try{
+		var items = JSON.parse(req.body.items);
+	} catch(err) {
+		if(err) console.log(err);
+	}
+
 	var userOutfit = new Outfit();
-	userOutfit.id = '0';
 	userOutfit.author = 'your\'s truley';
 	userOutfit.date = Date.now();
 	userOutfit.images = [{ data: fs.readFileSync(req.file.path), contentType: req.file.mimetype }];
-	userOutfit.items = [];
-	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink}
+	userOutfit.items = items;
+	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
+	userOutfit.tags = [{ tag: 'frontpage' }];
 
 	userOutfit.save(function(err, fluffy){
 		if (err) console.log(err);

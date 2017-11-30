@@ -91,3 +91,17 @@ h1{
 	margin-top: 60px;
 	
 }
+
+ul.item-list{
+	padding: 0px;
+	list-style-type: none;
+}
+
+i.fa-arrow-right{
+	float: right;
+	margin-left: 20px;
+}
+
+i.fa-label{
+	margin-right: 10px;
+}

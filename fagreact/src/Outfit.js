@@ -5,7 +5,7 @@ import './resources/css/outfit.css';
 class Outfit extends Component{
 	constructor(props){
 		super(props);
-		this.state = {};
+		this.state = { outfit: { items: [], images: [{ contentType : '', base64: ''}]} };
 	}
 
 	componentDidMount(){
@@ -13,9 +13,7 @@ class Outfit extends Component{
 			.then(response => response.json())
 	  		.then((body) => {
 	    		console.log(body);
-	    		let imageAtts = 'data:' + body.images[0].contentType + ';base64, ' + body.images[0].base64;
-	    		this.setState({ author: body.author });
-	    		this.setState({ imageData:  imageAtts});
+	    		this.setState({ outfit: body });
   		});
 	}
 
@@ -26,17 +24,26 @@ class Outfit extends Component{
 				<div className="row">
 
 					<div className="col-md-6">
-						<img src={this.state.imageData} />
+						 <img src={'data:' + this.state.outfit.images[0].contentType + ';base64, ' + this.state.outfit.images[0].base64} />
 					</div>
 
 					<div className="col-md-6">
 
 						<div id="item-details">
 							<h2>title</h2>
-							<ul>
-								<li>Author: { this.state.author }</li>
-								<li>One Off</li>
-								<li>Medium</li>
+							<ul className="list-group item-list">
+								{this.state.outfit.items.map(function(item){
+								    return (
+								    <div className="dynamicItem">
+								     	<li class="list-group-item">
+											<a href={ item.url }>
+											{ item.name }
+											<i class="fa fa-arrow-right" aria-hidden="true"></i>
+											</a>
+										</li>
+								    </div>
+								    );
+								  }, this)}
 							</ul>
 						</div>
 						<div id="item-misc">
