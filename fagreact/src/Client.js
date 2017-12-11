@@ -24,5 +24,11 @@ function postOutfit(outfit){
 	});
 }
 
-const Client = { getOutfit, getRandomOutfits, postOutfit };
+function deleteOutfit(id){
+	return fetch(`http://localhost:5000/api/outfits/` + id, {
+	method: 'DELETE'
+	});
+}
+
+const Client = { getOutfit, getRandomOutfits, postOutfit, deleteOutfit };
 export default Client

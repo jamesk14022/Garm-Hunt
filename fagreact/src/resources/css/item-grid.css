@@ -1,0 +1,32 @@
+div.masonry{
+	margin: 0 auto;
+}
+
+a.link-item{
+}
+
+div.dynamicItem{
+	width: 350px;
+}
+
+.editor-item{
+	padding: 20px;
+}
+
+img.img-item{
+	width: 300px;
+	height: auto;
+}
+
+.glyphicon-heart{
+	font-size: 20px;
+	display: none; 
+}
+
+.fash-item:hover .glyphicon-heart{
+	display: block;
+}
+
+.glyphicon-heart:hover{
+	color: red;
+}

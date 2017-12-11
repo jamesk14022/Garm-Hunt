@@ -1,7 +1,12 @@
 var express = require('express');
 var app = express();
-var cors = require('cors');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({'extended' : 'true'}));
+app.use(bodyParser.json());
+app.use(bodyParser.json({type : 'application/vnd.api+json'}));
+
+var cors = require('cors');
 var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
@@ -17,13 +22,8 @@ var shortid = require('shortid');
 
 var path = require('path');
 var fs = require('fs');
-var bodyParser = require('body-parser');
 
 const URL = require('url');
-
-app.use(bodyParser.urlencoded({'extended' : 'true'}));
-app.use(bodyParser.json());
-app.use(bodyParser.json({type : 'application/vnd.api+json'}));
 
 var outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
@@ -52,15 +52,18 @@ app.get('/api/outfits/:outfitId', function(req, res){
 
 //delivers a number of outfits, defaulting to 1
 app.get('/api/outfits', function(req, res){
-	let limit = parseInt(req.body.limit) || 1;
+	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find().limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		outfit[0].images[0]['base64'] = outfit[0].images[0].data.toString('base64');
+		Object.keys(outfit).forEach(function(key,index) {
+			outfit[key].images[0]['base64'] = outfit[key].images[0].data.toString('base64');
+		});
 		res.json(outfit);
 	}
 	);
 });
 
+//post a new outfit to the app
 app.post('/api/outfit', upload.single('image'), function(req, res){
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
@@ -81,6 +84,13 @@ app.post('/api/outfit', upload.single('image'), function(req, res){
 	userOutfit.tags = [{ tag: 'frontpage' }];
 
 	userOutfit.save(function(err, fluffy){
+		if (err) console.log(err);
+	});
+});
+
+//delete an outfit from the app based on id
+app.delete('/api/outfits/:outfitId', function(req, res){
+	Outfit.findOneAndRemove({ _id: req.params.outfitId }, function(err, response){
 		if (err) console.log(err);
 	});
 });

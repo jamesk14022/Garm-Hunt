@@ -1,20 +1,9 @@
-.editor-item{
-	background-size: cover;
-	height: 200px;
-	padding: 20px;
-	position: relative;
-	background-color: #dbdbdb;
+div.row{
+	margin: 0px;
 }
 
-img.img-item{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-hr.home-division{
-	margin-top: 70px;
-	margin-bottom: 10px;
+div.search-bar{
+	padding: 0px 15px;
 }
 
 .fash-item{
@@ -77,33 +66,6 @@ p{
 
  h2 span.spacer{
 	padding: 0 5px;
-}
-
-.glyphicon-heart{
-	font-size: 20px;
-	display: none; 
-}
-
-.fash-item:hover .glyphicon-heart{
-	display: block;
-}
-
-.glyphicon-heart:hover{
-	color: red;
-}
-
-.glyphicon-link{
-	font-size: 20px;
-	display: none;
-	margin-top: 15px;
-}
-
-.fash-item:hover .glyphicon-link{
-	display: block;
-}
-
-.glyphicon-link:hover{
-	color: red;
 }
 
 input.forn-control{

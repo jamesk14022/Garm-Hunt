@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 import './resources/css/navbar.css';
 
 class Header extends Component {
+responseFacebook(response) {
+  console.log(response);
+}
+
+loginClick(){
+  console.log('loginClick');
+}
+
 render() {
 return (
 <div className="Header">
@@ -25,13 +34,17 @@ return (
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
-        <li><a href="">Women</a></li>
-        <li><a href="">Men</a></li>
       </ul>
 
       <ul className="nav navbar-nav navbar-right">
         <li><Link to={`/submit`} >Submit an Outfit</Link></li>
-         <li><a href="">Login/Reg</a></li>
+         <li> <FacebookLogin
+            appId="1088597931155576"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={this.loginClick}
+            callback={this.responseFacebook} />
+        </li>
       </ul>
     </div>
   </div>

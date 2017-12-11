@@ -4,6 +4,7 @@ import Header from './Header';
 import Home from './Home';
 import Outfit from './Outfit';
 import Submit from './Submit';
+import Admin from './Admin';
 
 const App = () => (
   <div>
@@ -12,6 +13,7 @@ const App = () => (
       <Route exact path='/' component={Home}/>
       <Route path='/outfit/:id' component={Outfit}/>
       <Route path='/submit' component={Submit}/>
+      <Route path='/admin' component={Admin}/>
     </Switch>
   </div>
 )
