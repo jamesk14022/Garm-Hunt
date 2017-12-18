@@ -20,33 +20,33 @@ componentDidMount(){
 }
 
 render() {
-var items = this.state.outfits.map((item, index) =>
+  var items = this.state.outfits.map((item, index) =>
     <div className="dynamicItem" key={index}>
     <Link className="link-item" to={`/outfit/` + item._id} >
       <div className="editor-item">
-        <img className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
+        <img alt="outfit" className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
         <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
       </div>
     </Link>
     </div>
-)
+  )
 
-var masonryOptions = {
-    transitionDuration: 0
-};
+  var masonryOptions = {
+      transitionDuration: 0
+  };
 
-return (
-<div className="container">
-<Masonry
-  className="masonry"
-  options={masonryOptions} // default {}
-  disableImagesLoaded={false} // default false
-  updateOnEachImageLoad={true} // default false and works only if disableImagesLoaded is false
->
-{items}
-</Masonry>
-</div>
-);
+  return (
+  <div className="container">
+  <Masonry
+    className="masonry"
+    options={masonryOptions} // default {}
+    disableImagesLoaded={false} // default false
+    updateOnEachImageLoad={true} // default false and works only if disableImagesLoaded is false
+  >
+  {items}
+  </Masonry>
+  </div>
+  );
 }
 }
 

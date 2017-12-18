@@ -33,18 +33,16 @@ return (
 
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul className="nav navbar-nav">
-      </ul>
-
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to={`/submit`} >Submit an Outfit</Link></li>
-         <li> <FacebookLogin
+        <li><Link to={`/submit`} ><button className="btn btn-default nav-link-right" type="button">Submit an Outfit</button></Link></li>
+         <li><a><FacebookLogin
             appId="1088597931155576"
             autoLoad={true}
             fields="name,email,picture"
             onClick={this.loginClick}
-            callback={this.responseFacebook} />
-        </li>
+            callback={this.responseFacebook}
+            cssClass={'btn btn-default nav-link-right'} />
+        </a></li>
       </ul>
     </div>
   </div>

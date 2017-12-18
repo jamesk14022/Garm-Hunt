@@ -1,14 +1,22 @@
+/*@font-face{
+  font-family: Couture;
+  src: url("../fonts/couture-bld.otf") format("opentype");
+  font-weight: 200;
+}*/
 
-    @font-face{
-      font-family: Couture;
-      src: url("../fonts/couture-bld.otf") format("opentype");
-      font-weight: 200;
-    }
-
-a.navbar-brand{
+/*a.navbar-brand{
 	font-family: Couture;
 }
 
 ul.navbar-nav{
 	font-family: Couture;
+}*/
+a.navbar-brand{
+	margin-top: 5px;
 }
+
+.nav-link-right:hover{
+	transform: translateY(-1px);
+	box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+}
+

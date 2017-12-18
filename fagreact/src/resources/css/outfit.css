@@ -12,8 +12,7 @@
 	border-top: 2px solid grey;
 	border-bottom: 2px solid grey;
 	width: 100%;
-	height: 350px;
-	padding: 15px;
+	padding: 10px 15px;
 }
 
 ul.item-list{
@@ -25,25 +24,10 @@ li.item{
 	margin-bottom: 20px;
 }
 
-#item-details h2{
-	position: absolute;
-	left: 0px;
-}
-
-#item-details h3{
-	position: absolute;
-	right: 0px;
-}
-
-#item-details ul{
-	position: absolute;
-	top: 100px;
-	font-size: 20px;
-}
 
 #item-misc{
 	position: relative;
-	height: 250px;
+	height: 70px;
 }
 
 #social{
@@ -52,29 +36,53 @@ li.item{
 	right: 5px;
 }
 
-div#author{
-	border: 1px solid #cccccc;
-	border-radius: 5px;
-	padding: 10px;
-	min-height: 70px;
-}
-
 .social-buttons{
 	display: inline;
 	font-size: 32px;
 	margin-left: 20px;
 }
 
+#app-action{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+.action-buttons .glyphicon-heart{
+	display: inline;
+	font-size: 30px;
+	text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black;
+	color: white;
+}
+
+/*forces the model and profile columns to be of equal height */
+.row.equal {
+display: flex;
+flex-wrap: wrap;
+}
+
+div#author{
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	min-height: 60px;
+}
+
+div#model{
+	padding: 10px;
+	height: 100%;
+}
+
+div#model p{
+	position: absolute;
+	bottom: -5px;
+	left: 0px;
+}
+
 #people{
 	width: 100%;
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	padding: 15px;
 }
 
 h1{
-
 	margin-top: 100px;
 }
 
@@ -112,6 +120,7 @@ h1{
 ul.item-list{
 	padding: 0px;
 	list-style-type: none;
+	margin: 30px 0px 50px 0px;
 }
 
 i.fa-arrow-right{
@@ -126,38 +135,29 @@ i.fa-label{
 /*profile styles start
 */
 
-div.spotify-widget{
-	border-radius: 3px;
-	padding-bottom: 10px;
+.col-md-6.author{
+	margin-right: 0px;
+	padding-left: 15px;
+	padding-right: 0px;
 }
 
-div.sw_user_pic_wrapper{
-
+div#author{
+	padding-top: 5px; 
 }
 
-div.sw_user_pic_wrapper img{
+div.author_pic_wrapper img{
 	height: 50px;
 	width: 50px;
 }
 
-div.sw_user_info{
-
+h4.display_name{
+	white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0px;
 }
 
-h4.sw_display_name{
+h5.username{
 	margin-top: 5px;
-}
-
-h5.sw_username{
-	padding-top: 0px;
-}
-
-.spotify-widget hr{
-	margin: 0px;
-}
-
-div.sw_account_wrapper p{
-	font-size: 20px;
 }
 
 .sw_account_wrapper img{
