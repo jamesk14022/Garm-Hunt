@@ -6,7 +6,7 @@ import './resources/css/submit.css';
 class Submit extends Component{
   constructor(props) {
     super(props);
-    this.state = { inputs: ['input-0'] };
+    this.state = { inputs: ['input-0'], images: []};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,7 +40,7 @@ class Submit extends Component{
 
   onImageDrop(files) {
     this.setState({
-      image: files[0]
+    	images: this.state.images.concat(files)
     });
   }
 
@@ -60,11 +60,22 @@ class Submit extends Component{
   }
 
   render() {
+
+  	let dropzoneStyle = {
+  		'width': '100%',
+  		'height': '200px',
+  		'borderWidth': '2px',
+  		'borderStyle': 'dashed',
+  		'borderRadius': '5px',
+  		'textAlign': 'center',
+  		'paddingTop': '50px'
+  	}
+
     return (
     <div className="Submit">
-      <div className="container">
-      <form className="form-horizontal" onSubmit={this.handleSubmit}>
-        <fieldset>
+    <div className="container">
+    <form className="form-horizontal" onSubmit={this.handleSubmit}>
+      <fieldset>
 
 		<legend>Submit an Outfit</legend>
 
@@ -73,15 +84,15 @@ class Submit extends Component{
                 return (
                 <div className="dynamicItem" key={submission}>
 			     <div className="form-group">
-				  <label className="col-md-4 control-label" for="textinput">Item Name</label>  
+			     <label className="col-md-4 control-label" htmlFor="textinput">Item Name</label>  
 				  <div className="col-md-4">
-				  <input id={'name' + submission } name={'name' + submission } type="text" placeholder="" className="form-control input-md" onChange={this.handleChange} />
+				  	<input id={'name' + submission } name={'name' + submission } type="text" placeholder="" className="form-control input-md" onChange={this.handleChange} />
 				  </div>
 				</div>
 
 				<div className="form-group">
-				  <label className="col-md-4 control-label" for="textinput">Item Link</label>  
-				  <div className="col-md-4">
+				<label className="col-md-4 control-label" htmlFor="textinput">Item Link</label>  
+				<div className="col-md-4">
 				  <input id={'link' + submission } name={'link' + submission } type="text" placeholder="" className="form-control input-md" onChange={this.handleChange} />
 				  </div>
 				</div>
@@ -97,29 +108,28 @@ class Submit extends Component{
 		</div>
 
 		<div className="form-group">
-		  <label className="col-md-4 control-label" for="textinput">Model Name</label>  
+		  <label className="col-md-4 control-label" htmlFor="textinput">Model Name</label>  
 		  <div className="col-md-4">
 		  <input id="modelName" name="modelName" type="text" placeholder="Jorga Smith" className="form-control input-md"onChange={this.handleChange} />
-		    
 		  </div>
 		</div>
 
 		<div className="form-group">
-		  <label className="col-md-4 control-label" for="textinput">Model Link</label>  
+		  <label className="col-md-4 control-label" htmlFor="textinput">Model Link</label>  
 		  <div className="col-md-4">
 		  <input id="modelLink" name="modelLink" type="text" placeholder="https://www.instagram.com/jorjasmith_" className="form-control input-md" onChange={this.handleChange}/>
-		    
 		  </div>
 		</div>
 
 		<div className="form-group">
-			<div className="col-md-8 col-md-offset-4">
+			<div className="col-md-4 col-md-offset-4">
 		    <Dropzone
 		      name="image"
 		      multiple={false}
 		      accept="image/*"
+		      style={dropzoneStyle}
 		      onDrop={this.onImageDrop.bind(this)}
-		      >
+		    >
 		      <p>Drop an image or click to select a file to upload.</p>
 		    </Dropzone>
 		    </div>
@@ -131,10 +141,10 @@ class Submit extends Component{
 		  </div>
 		</div>
 
-		</fieldset>
-      </form>
-      </div>
-      </div>
+	</fieldset>
+    </form>
+    </div>
+    </div>
     );
   }
 }

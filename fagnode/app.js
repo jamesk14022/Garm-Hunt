@@ -39,13 +39,30 @@ var outfitSchema = new mongoose.Schema({
 
 var Outfit = mongoose.model('Outfit', outfitSchema);
 
+//takes array of image data and makes it parseable by browser
+function convertImageData(outfits){
+	Object.keys(outfits).forEach(function(key,index) {
+		for(let i = 0; i < outfits[key].images.length; i++){
+			outfits[key].images[i]['base64'] = outfits[key].images[i].data.toString('base64');
+		}
+	});
+	return outfits;
+}
 
 //get specific outfit based on Id
 app.get('/api/outfits/:outfitId', function(req, res){
 	Outfit.find({ _id: req.params.outfitId }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		outfit[0].images[0]['base64'] = outfit[0].images[0].data.toString('base64');
-		res.json(outfit[0]);
+		res.json(convertImageData(outfit)[0]);
+	}
+	);
+});
+
+//returns an array of outfits based on tag
+app.get('/api/tags/outfits/:tag', function(req, res){
+	Outfit.find({ 'tags.tag': req.params.tag }).lean().exec(function(err, outfit){
+		if (err) return console.log(err);
+		res.json(convertImageData(outfit));
 	}
 	);
 });
@@ -55,16 +72,13 @@ app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find().limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		Object.keys(outfit).forEach(function(key,index) {
-			outfit[key].images[0]['base64'] = outfit[key].images[0].data.toString('base64');
-		});
-		res.json(outfit);
+		res.json(convertImageData(outfit));
 	}
 	);
 });
 
 //post a new outfit to the app
-app.post('/api/outfit', upload.single('image'), function(req, res){
+app.post('/api/outfit', upload.any(), function(req, res){
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
 
@@ -74,11 +88,16 @@ app.post('/api/outfit', upload.single('image'), function(req, res){
 	} catch(err) {
 		if(err) console.log(err);
 	}
+	
+	var images = [];
+	req.files.forEach(function(item){
+		images.push({ data: fs.readFileSync(item.path), contentType: item.mimetype });
+	});
 
 	var userOutfit = new Outfit();
 	userOutfit.author = 'your\'s truley';
 	userOutfit.date = Date.now();
-	userOutfit.images = [{ data: fs.readFileSync(req.file.path), contentType: req.file.mimetype }];
+	userOutfit.images = images;
 	userOutfit.items = items;
 	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
 	userOutfit.tags = [{ tag: 'frontpage' }];

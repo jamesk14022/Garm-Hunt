@@ -6,6 +6,7 @@ import Home from './Home';
 import Outfit from './Outfit';
 import Submit from './Submit';
 import Admin from './Admin';
+import Tag from './Tag';
 
 const App = () => (
   <div>
@@ -13,6 +14,7 @@ const App = () => (
     <Switch>
       <Route exact path='/' component={Home}/>
       <Route path='/outfit/:id' component={Outfit}/>
+      <Route path='/tag/:tag' component={Tag}/>
       <Route path='/submit' component={Submit}/>
       <Route path='/admin' component={Admin}/>
     </Switch>

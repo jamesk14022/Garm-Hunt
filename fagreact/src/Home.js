@@ -11,9 +11,9 @@ class Home extends Component {
 		    <div className="col-md-6"><div className="feature"><h3>Palace x Adidas<span className="spacer"></span></h3></div></div>
 		  </div>
 		</div>
-		<ItemGrid />
+		<ItemGrid tag="frontpage"/>
 		</div>
-		);
+	);
 }
 }
 

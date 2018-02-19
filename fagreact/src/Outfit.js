@@ -8,11 +8,11 @@ class Outfit extends Component{
 	constructor(props){
 		super(props);
 		this.deleteOutfit = this.deleteOutfit.bind(this);
-		this.state = { outfit: { model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}]} };
+		this.state = { outfit: { model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]} };
 	}
 
 	componentDidMount(){
-		Client.getOutfit(this.props.match.params.id)
+		Client.getOutfitById(this.props.match.params.id)
 			.then(response => response.json())
 	  		.then((body) => {
 	    		console.log(body);
@@ -22,7 +22,7 @@ class Outfit extends Component{
 
 	componentWillReceiveProps(newProps){
 		// handles change from (/outfit/xxx to /outfit/xxx)
-	  	Client.getOutfit(newProps.match.params.id)
+	  	Client.getOutfitById(newProps.match.params.id)
 	    .then(response => response.json())
 		.then((body) => {
 			console.log(body);
@@ -37,12 +37,11 @@ class Outfit extends Component{
 	}
 
 	render(){
-		let modelName = this.state.outfit.modelName;
-		let modelLink = this.state.outfit.modelLink;
+		let { modelName, modelLink } = this.state.outfit;
 		let modelInfo = null;
 
 		if(modelName && modelLink){
-			modelInfo = <Link to={ modelLink }><p>{modelName}</p></Link>;
+			modelInfo = <Link to={ modelLink }><p>{ modelName }</p></Link>;
 		}else if(modelName){
 			modelInfo = <p>{ modelName }</p>;
 		}else{	
@@ -59,6 +58,11 @@ class Outfit extends Component{
 					</div>
 
 					<div className="col-md-6">
+						<div className="tags">
+							{this.state.outfit.tags.map((tag, index) =>
+								<Link to={`/tag/` + tag.tag} key={index}><p className="item-tag" key={index}>{ tag.tag }</p></Link>
+							)}
+						</div>
 						<div id="item-details">
 						<div id="item-misc">
 							<div id="app-action">
@@ -109,12 +113,21 @@ class Outfit extends Component{
 							</div>
 						</div>
 						</div>
+						<div className="gallery">
+							<div className="row">
+								{(this.state.outfit.images.length < 2) ? <div></div> : this.state.outfit.images.map((image, index) => 
+								<div className="col-md-3">
+									 <img alt="outfit thumbnail" className="img-responsive" src={'data:' + image.contentType + ';base64, ' + image.base64} />
+								</div>
+								)}
+							</div>
+						</div>
 					</div>
 				</div>
 				<div className="suggested-items">
-				<h2>More Inspiration</h2>
-				<ItemGrid />
-			</div>
+					<h2>More from {this.state.outfit.tags[0].tag}</h2>
+					<ItemGrid tag={this.state.outfit.tags[0].tag}/>
+				</div>
 			</div>
 		</div>
 		);

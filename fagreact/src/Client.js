@@ -1,7 +1,11 @@
-function getOutfit(id){
+function getOutfitById(id){
   return fetch(`http://localhost:5000/api/outfits/` + id);
 }
 
+function getOutfitsByTag(tag){
+	tag = tag || 'frontpage'
+	return fetch(`http://localhost:5000/api/tags/outfits/` + tag);
+}
 
 function getRandomOutfits(limit){
 	let data = {
@@ -18,6 +22,15 @@ function postOutfit(outfit){
 		formData.append(name, outfit[name]);
 	}
 
+	let images = outfit['images'];
+	if(images){
+		for (var i = 0; i < images.length; i++) {
+			formData.append("images[]", images[i], images[i]['name']);
+		}
+	}
+
+	console.log(formData);
+
 	return fetch(`http://localhost:5000/api/outfit`, {
 	method: 'POST',
 	body: formData
@@ -30,5 +43,5 @@ function deleteOutfit(id){
 	});
 }
 
-const Client = { getOutfit, getRandomOutfits, postOutfit, deleteOutfit };
+const Client = { getOutfitById, getOutfitsByTag, getRandomOutfits, postOutfit, deleteOutfit };
 export default Client

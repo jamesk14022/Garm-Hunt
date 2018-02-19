@@ -1,10 +1,13 @@
 .main-content{
 	padding-top: 100px;
 }
-#gallery{
-	background-color: #FFCCCB;
-	height: 500px;
-	background-size: auto;
+
+div.gallery{
+	padding-top: 7px;
+}
+
+div.gallery div.col-md-3{
+	padding: 0px 7px 0px 0px;
 }
 
 #item-details{
@@ -167,4 +170,15 @@ h5.username{
 	height: 200px;
 }
 
+div.tags{
+	padding: 7px 0px;
+	font-size: 19px;
+}
+
+p.item-tag{
+	background-color: #E1ECF4;
+	color: #39739d;
+	padding: 5px;
+	display: inline;
+}
 /*profile styles end */
