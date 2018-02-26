@@ -20,7 +20,7 @@ return (
     <title>Correct_Couture</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   </Helmet>
-  <nav className="navbar navbar-default">
+  <nav className="navbar navbar-default navbar-fixed-top">
   <div className="container-fluid">
     <div className="navbar-header">
       <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,18 +30,17 @@ return (
         <span className="icon-bar"></span>
       </button>
       <Link className="navbar-brand" to={`/`} >Correct_Couture</Link>
-
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to={`/submit`} ><button className="btn btn-default nav-link-right" type="button">Submit an Outfit</button></Link></li>
+         <li><a><span style={{transition: 'opactity 0.5s'}}><button type="button" className="no-button metro">About Us</button></span></a></li>
          <li><a><FacebookLogin
             appId="1088597931155576"
             autoLoad={true}
             fields="name,email,picture"
             onClick={this.loginClick}
             callback={this.responseFacebook}
-            cssClass={'btn btn-default nav-link-right'} />
+            cssClass={'no-button'} />
         </a></li>
       </ul>
     </div>

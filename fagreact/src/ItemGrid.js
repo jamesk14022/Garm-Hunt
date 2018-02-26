@@ -7,7 +7,8 @@ import './resources/css/item-grid.css';
 class ItemGrid extends Component {
 constructor(props){
   super(props);
-  this.state = {loading: false, outfits: [{ images: [{}] }]}
+  this.state = {loading: false, outfits: [], pagination: {pages: 1, itemsPerPage: 10, currentPage: 1}};
+  this.setPage = this.setPage.bind(this);
 }
 
 componentDidMount(){
@@ -15,35 +16,58 @@ componentDidMount(){
   Client.getOutfitsByTag(this.props.tag)
   .then(response => response.json())
     .then((body) => {
-      console.log(body);
-      this.setState({ loading: false, 'outfits': this.state.outfits.concat(body).concat(body).concat(body).concat(body) });
+      var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
+      this.setState({'outfits':  multiOutfits});
+      let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+      this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
   });
 }
 
+setPage(newPage){
+  this.setState({pagination: {...this.state.pagination, currentPage: newPage}});
+}
+
 render() {
+  console.log(this.state);
+  let currentPage = this.state.pagination.currentPage;
+  let pages = this.state.pagination.pages;
+  let fauxArr = [...Array(pages)];
+  let allOutfits = [...this.state.outfits];
+  let outfitsToRender = allOutfits.slice(this.state.pagination.itemsPerPage * (currentPage - 1), this.state.pagination.itemsPerPage * currentPage);
   let masonryOptions = {
       transitionDuration: 0
   };
 
   return (
-  <div className="container">
-  <Masonry
-    className="masonry"
-    options={masonryOptions} // default {}
-    disableImagesLoaded={false} // default false
-    updateOnEachImageLoad={true} // default false and works only if disableImagesLoaded is false
-  >
-  {this.state.outfits.map((item, index) =>
-    <div className="dynamicItem" key={index}>
-    <Link className="link-item" to={`/outfit/` + item._id} >
-      <div className="editor-item">
-        <img alt="outfit" className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
-        <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
+  <div className="container-masonry">
+    <Masonry
+      className="masonry"
+      options={masonryOptions} // default {}
+      disableImagesLoaded={false} // default false
+      updateOnEachImageLoad={true} // default false and works only if disableImagesLoaded is false
+    >
+    {(this.state.loading) ? <p>loading</p> : outfitsToRender.map((item, index) =>
+      <div className="dynamicItem" key={index}>
+      <Link className="link-item" to={`/outfit/` + item._id} >
+        <div className="editor-item">
+          <img alt="outfit" className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
+          <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
+        </div>
+      </Link>
       </div>
-    </Link>
-    </div>
-  )}
-  </Masonry>
+    )}
+    </Masonry>
+    <nav id="pagination" aria-label="Page navigation">
+      <ul className="pagination pagination-lg">
+        <li className={(currentPage === 1) ? "disabled" : ""} onClick={() => this.setPage(currentPage - 1)}><a aria-label="Previous"><span aria-hidden="true">Previous</span></a></li>
+
+        {fauxArr.map((x, i) =>
+          <li className={(i+1===currentPage) ? "active" : "" } onClick={() => this.setPage(i + 1)}><a>{i + 1}</a></li>
+        )}
+
+        <li className={(currentPage === fauxArr.length) ? "disabled" : ""} onClick={() => this.setPage(currentPage + 1)}><a aria-label="Next"><span aria-hidden="true">Next</span></a></li>
+      </ul>
+    </nav>
   </div>
   );
 }

@@ -8,7 +8,9 @@ class Outfit extends Component{
 	constructor(props){
 		super(props);
 		this.deleteOutfit = this.deleteOutfit.bind(this);
-		this.state = { outfit: { model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]} };
+		this.setImageFocus = this.setImageFocus.bind(this);
+		//focus denotes array pos of image to be enlarged
+		this.state = { outfit: { model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]}, focus: 0 };
 	}
 
 	componentDidMount(){
@@ -29,6 +31,11 @@ class Outfit extends Component{
 			this.setState({ outfit: body });
 		});
 		window.scrollTo(0,0);
+	}
+
+	//sets image to be englarged
+	setImageFocus(key){
+		this.setState({ focus: key })
 	}
 
 	deleteOutfit(e){
@@ -53,7 +60,7 @@ class Outfit extends Component{
 			<div className="container main-content">
 				<div className="row">
 					<div className="col-md-6">
-						 <img alt="outfit" className="img-responsive" src={'data:' + this.state.outfit.images[0].contentType + ';base64, ' + this.state.outfit.images[0].base64} />
+						 <img alt="outfit" className="img-responsive" src={'data:' + this.state.outfit.images[this.state.focus].contentType + ';base64, ' + this.state.outfit.images[this.state.focus].base64} />
 						 <a onClick={this.deleteOutfit}>Remove Outfit</a>
 					</div>
 
@@ -117,7 +124,7 @@ class Outfit extends Component{
 							<div className="row">
 								{(this.state.outfit.images.length < 2) ? <div></div> : this.state.outfit.images.map((image, index) => 
 								<div className="col-md-3">
-									 <img alt="outfit thumbnail" className="img-responsive" src={'data:' + image.contentType + ';base64, ' + image.base64} />
+									 <img alt="outfit thumbnail" className="img-responsive" key={index} src={'data:' + image.contentType + ';base64, ' + image.base64} onClick={() => this.setImageFocus(index)} />
 								</div>
 								)}
 							</div>
@@ -125,8 +132,15 @@ class Outfit extends Component{
 					</div>
 				</div>
 				<div className="suggested-items">
-					<h2>More from {this.state.outfit.tags[0].tag}</h2>
-					<ItemGrid tag={this.state.outfit.tags[0].tag}/>
+					<div className="row">
+					<div className="col-md-12">
+						<h2>More from {this.state.outfit.tags[0].tag}</h2>
+						<hr />
+					</div>
+					</div>
+					<div className="row">
+						<ItemGrid tag={this.state.outfit.tags[0].tag}/>
+					</div>
 				</div>
 			</div>
 		</div>

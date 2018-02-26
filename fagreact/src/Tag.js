@@ -11,7 +11,10 @@ class Tag extends Component{
 		return(
 			<div className="Tag">
 			<div className="container">
-				<h2>Tagged { this.tag }</h2>
+				<div className="container">
+				<h2 style={{ 'margin-top': '80px'}}>Tagged { this.tag }</h2>
+				<hr />
+				</div>
 				<ItemGrid tag={ this.tag } />
 			</div>
 			</div>

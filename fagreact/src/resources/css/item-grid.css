@@ -2,6 +2,18 @@ div.masonry{
 	margin: 0 auto;
 }
 
+div.container-masonry{
+	padding: 0px;
+}
+
+nav#pagination{
+  text-align: center;
+}
+
+nav#pagination ul{
+  display: inline-block;
+}
+
 a.link-item{
 }
 
