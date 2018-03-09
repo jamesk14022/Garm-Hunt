@@ -23,3 +23,7 @@ a.navbar-brand{
 	border: none;
 	background: none;
 }
+
+.link-fade{
+	transition: opactity 0.5s;
+}

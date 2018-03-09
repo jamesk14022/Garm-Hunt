@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login';
+import FacebookButton from './FacebookButton';
 import './resources/css/navbar.css';
 
 class Header extends Component {
-responseFacebook(response) {
-  console.log(response);
+
+constructor(props){
+  super(props);
+  this.state = { username: '' };
+  this.onFacebookLogin = this.onFacebookLogin.bind(this);
 }
 
-loginClick(){
-  console.log('loginClick');
+onFacebookLogin(loginStatus, resultObject){
+  console.log(resultObject)
+  if (loginStatus === true) {
+    this.setState({
+      username: resultObject.name
+    });
+    //pass state to app.js for route auth
+    this.props.authChange(true, resultObject.id)
+  } else {
+    this.setState({
+      username: null
+    });
+    this.props.authChange(false)
+  }
 }
 
 render() {
+let { username } = this.state;
+
 return (
 <div className="Header">
   <Helmet>
@@ -33,15 +50,33 @@ return (
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">
-         <li><a><span style={{transition: 'opactity 0.5s'}}><button type="button" className="no-button metro">About Us</button></span></a></li>
-         <li><a><FacebookLogin
-            appId="1088597931155576"
-            autoLoad={true}
-            fields="name,email,picture"
-            onClick={this.loginClick}
-            callback={this.responseFacebook}
-            cssClass={'no-button'} />
-        </a></li>
+
+        {username && 
+          <li><a><span className="link-fade"><button type="button" className="no-button metro">
+        Welcome back, { username }</button></span></a></li>}
+
+        {username && 
+          <li><a><span className="link-fade"><button type="button" className="no-button metro">
+        My Account</button></span></a></li>}
+
+         <li><a><span className="link-fade"><button type="button" className="no-button metro">About Us</button></span></a></li>
+         
+         {!username && 
+          <li><a><span className="link-fade">
+          <FacebookButton action="login" onLogin={this.onFacebookLogin}>
+            <button type="button" className="no-button metro">Log In</button>
+          </FacebookButton>
+         </span>
+         </a></li>}
+
+         {username && 
+          <li><a><span className="link-fade">
+          <FacebookButton action="logout" onLogin={this.onFacebookLogin}>
+            <button type="button" className="no-button metro">Log Out</button>
+          </FacebookButton>
+         </span>
+         </a></li>}
+         
       </ul>
     </div>
   </div>

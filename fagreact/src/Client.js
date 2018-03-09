@@ -7,11 +7,30 @@ function getOutfitsByTag(tag){
 	return fetch(`http://localhost:5000/api/tags/outfits/` + tag);
 }
 
+function getOutfitsByUser(user){
+	return fetch(`http://localhost:5000/api/users/outfits/` + user);
+}
+
+//need to json the limit paramenter to get it to work
 function getRandomOutfits(limit){
 	let data = {
 		limit: limit
 	}
 	return fetch(`http://localhost:5000/api/outfits/`, {
+		body: data 
+	});
+}
+
+//must use json to properly send body data to node 
+function postUser(user){
+	let data = JSON.stringify(user);
+	console.log(data)
+	return fetch(`http://localhost:5000/api/user/`, {
+		 headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
+		method: 'POST',
 		body: data 
 	});
 }
@@ -43,5 +62,5 @@ function deleteOutfit(id){
 	});
 }
 
-const Client = { getOutfitById, getOutfitsByTag, getRandomOutfits, postOutfit, deleteOutfit };
+const Client = { getOutfitById, getOutfitsByTag, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit };
 export default Client

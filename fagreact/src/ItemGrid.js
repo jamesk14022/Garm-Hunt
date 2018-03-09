@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
 import { Link } from 'react-router-dom';
 import Client from './Client.js';
 import Masonry from 'react-masonry-component';
@@ -7,12 +8,14 @@ import './resources/css/item-grid.css';
 class ItemGrid extends Component {
 constructor(props){
   super(props);
-  this.state = {loading: false, outfits: [], pagination: {pages: 1, itemsPerPage: 10, currentPage: 1}};
+  console.log(props)
+  this.state = {loading: false, outfits: [], pagination: {pages: 1, itemsPerPage: 20, currentPage: 1}};
   this.setPage = this.setPage.bind(this);
 }
 
 componentDidMount(){
   this.setState({ loading: true });
+  if(this.props.tag){
   Client.getOutfitsByTag(this.props.tag)
   .then(response => response.json())
     .then((body) => {
@@ -20,23 +23,54 @@ componentDidMount(){
       this.setState({'outfits':  multiOutfits});
       let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
       this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
-  });
+  })}else if(this.props.user){
+      Client.getOutfitsByUser(this.props.user)
+      .then(response => response.json())
+        .then((body) => {
+          var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
+          this.setState({'outfits':  multiOutfits});
+          let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+          this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
+      })
+    }
 }
+
+componentWillReceiveProps(nextProps){
+if(nextProps.tag){
+Client.getOutfitsByTag(nextProps.tag)
+  .then(response => response.json())
+    .then((body) => {
+      var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
+      this.setState({'outfits':  multiOutfits});
+      let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+      this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
+  })
+}
+}
+
 
 setPage(newPage){
   this.setState({pagination: {...this.state.pagination, currentPage: newPage}});
+  ReactDom.findDOMNode(this).scrollIntoView();
 }
 
 render() {
-  console.log(this.state);
   let currentPage = this.state.pagination.currentPage;
-  let pages = this.state.pagination.pages;
-  let fauxArr = [...Array(pages)];
+  let previous, next;
+  let fauxArr = [...Array(this.state.pagination.pages)];
   let allOutfits = [...this.state.outfits];
   let outfitsToRender = allOutfits.slice(this.state.pagination.itemsPerPage * (currentPage - 1), this.state.pagination.itemsPerPage * currentPage);
   let masonryOptions = {
       transitionDuration: 0
   };
+
+  if(currentPage !== 1){ 
+    previous = <li onClick={() => this.setPage(currentPage - 1)}><a aria-label="Previous"><span aria-hidden="true">Previous</span></a></li>;
+  }
+
+  if(currentPage !== fauxArr.length){
+    next = <li onClick={() => this.setPage(currentPage + 1)}><a aria-label="Next"><span aria-hidden="true">Next</span></a></li>;
+  }
 
   return (
   <div className="container-masonry">
@@ -59,13 +93,13 @@ render() {
     </Masonry>
     <nav id="pagination" aria-label="Page navigation">
       <ul className="pagination pagination-lg">
-        <li className={(currentPage === 1) ? "disabled" : ""} onClick={() => this.setPage(currentPage - 1)}><a aria-label="Previous"><span aria-hidden="true">Previous</span></a></li>
+        { previous }
 
         {fauxArr.map((x, i) =>
-          <li className={(i+1===currentPage) ? "active" : "" } onClick={() => this.setPage(i + 1)}><a>{i + 1}</a></li>
+          <li key={i} className={(i+1===currentPage) ? "active" : "" } onClick={() => this.setPage(i + 1)}><a>{i + 1}</a></li>
         )}
 
-        <li className={(currentPage === fauxArr.length) ? "disabled" : ""} onClick={() => this.setPage(currentPage + 1)}><a aria-label="Next"><span aria-hidden="true">Next</span></a></li>
+        { next }
       </ul>
     </nav>
   </div>

@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import Client from './Client.js';
 import Dropzone from 'react-dropzone';
+import { WithContext as ReactTags } from 'react-tag-input';
 import './resources/css/submit.css';
 
 class Submit extends Component{
   constructor(props) {
     super(props);
-    this.state = { inputs: ['input-0'], images: []};
-
+    console.log(props)
+    this.state = { inputs: ['input-0'], images: [], tags: [], suggestions: [] };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTagDelete = this.handleTagDelete.bind(this);
+    this.handleTagAddition = this.handleTagAddition.bind(this);
+    this.handleTagDrag = this.handleTagDrag.bind(this);
   }
 
   parseItemInputs(outfit){
@@ -25,6 +29,10 @@ class Submit extends Component{
 	    }
 	});
 	return JSON.stringify(items);
+  }
+
+  parseTags(tags){
+  	return JSON.stringify(tags);
   }
 
   handleChange(event) {
@@ -49,8 +57,8 @@ class Submit extends Component{
 
     var outfit = this.state;
     outfit.items = this.parseItemInputs(this.state);
-
-    console.log(this.state);
+    outfit.tags = this.parseTags(this.state.tags);
+    outfit.userID = this.props.id;
     Client.postOutfit(outfit);
   }
 
@@ -59,7 +67,35 @@ class Submit extends Component{
     this.setState({ inputs: this.state.inputs.concat([newInput]) });
   }
 
+  handleTagDelete(i){
+  	let tags = this.state.tags;
+    tags.splice(i, 1);
+    this.setState({tags: tags});
+  }
+
+  handleTagAddition(tag){
+  	let tags = this.state.tags;
+    tags.push({
+        id: tags.length + 1,
+        text: tag
+    });
+    this.setState({tags: tags});
+  }
+
+  handleTagDrag(tag, currPos, newPos){
+  	 let tags = this.state.tags;
+ 
+    // mutate array
+    tags.splice(currPos, 1);
+    tags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({ tags: tags });
+  }
+
   render() {
+
+  	const { tags, suggestions } = this.state;
 
   	let dropzoneStyle = {
   		'width': '100%',
@@ -133,6 +169,21 @@ class Submit extends Component{
 		      <p>Drop an image or click to select a file to upload.</p>
 		    </Dropzone>
 		    </div>
+	    </div>
+
+	    <div className="form-group">
+	    	<label className="col-md-4 control-label" htmlFor="textinput">Tags</label> 
+	    	<div className="col-md-4">
+	    		<ReactTags 
+            tags={tags}
+            suggestions={suggestions}
+            classNames={{ tagInputField: 'form-control input-md tag-input', tag: 'enteredTags', remove: 'removeTag'}}
+            placeholder={'Type a Tag and Hit Enter to Confirm'}
+            handleDelete={this.handleTagDelete}
+            handleAddition={this.handleTagAddition}
+            handleDrag={this.handleTagDrag} 
+          />
+	    	</div>
 	    </div>
 
 		<div className="form-group">

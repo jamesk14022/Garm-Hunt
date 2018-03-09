@@ -1,0 +1,26 @@
+A service for discovering and sharing small fashion brands.
+
+Globablisation and web technology have made starting a fashion brand in 2018 easier than ever before.
+We want to capitalise on this by helping people find interesting clothes from small labels they wouldnt 
+otherwise find.
+
+My target market is 18-25 yo fashion conscious and liberal men(possible exapansion or pivot to target women might be the next move),
+possibly better suited to target men in the US.
+
+Building this site also should help me cement what I have so far learned about the react framework. Also gaining experience in APIs and
+building with mobile capability in mind. 
+
+Traction Plan - Do things that dont scale
+scour lookbooks and similar sources for more content for the site
+write an interesting feature article for the homepage
+curate 1 collection for the homepage
+1 more feature ??
+
+its important to remembver that the value users get from the service is directly correlated with the number
+of good outfits on the platform
+
+post interesting outfits in relevant subreddits
+email brand owners and get them to submit outfits from their collections
+try to get media attention somehow
+
+

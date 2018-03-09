@@ -12,7 +12,7 @@ class Tag extends Component{
 			<div className="Tag">
 			<div className="container">
 				<div className="container">
-				<h2 style={{ 'margin-top': '80px'}}>Tagged { this.tag }</h2>
+				<h2 style={{ 'marginTop': '80px'}}>Tagged { this.tag }</h2>
 				<hr />
 				</div>
 				<ItemGrid tag={ this.tag } />

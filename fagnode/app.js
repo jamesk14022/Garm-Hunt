@@ -25,7 +25,7 @@ var fs = require('fs');
 
 const URL = require('url');
 
-var outfitSchema = new mongoose.Schema({
+const outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
 	author: String,
 	date: Date,
@@ -36,8 +36,14 @@ var outfitSchema = new mongoose.Schema({
 	model: { name: String, url: String}
 });
 
+const userSchema = new mongoose.Schema({
+	facebook_id: String, 
+	full_name: String,
+	email: String
+});
 
 var Outfit = mongoose.model('Outfit', outfitSchema);
+var User = mongoose.model('User', userSchema);
 
 //takes array of image data and makes it parseable by browser
 function convertImageData(outfits){
@@ -67,7 +73,16 @@ app.get('/api/tags/outfits/:tag', function(req, res){
 	);
 });
 
-//delivers a number of outfits, defaulting to 1
+//returns an array of outfits based on user
+app.get('/api/users/outfits/:user', function(req, res){
+	Outfit.find({ 'author': req.params.user }).lean().exec(function(err, outfit){
+		if (err) return console.log(err);
+		res.json(convertImageData(outfit));
+	}
+	);
+});
+
+//delivers a number of outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find().limit(limit).lean().exec(function(err, outfit){
@@ -75,6 +90,23 @@ app.get('/api/outfits', function(req, res){
 		res.json(convertImageData(outfit));
 	}
 	);
+});
+
+app.post('/api/user', function(req, res){
+	console.log(req.body)
+	let { id, name } = req.body;
+	var userData = new User();
+	userData.facebook_id = id;
+	userData.full_name = name;
+
+	User.count({ facebook_id: id }, function(err, count){
+		if(count === 0){
+			userData.save(function(err, fluffy){
+				if (err) console.log(err);
+			});
+		}
+	});
+
 });
 
 //post a new outfit to the app
@@ -85,6 +117,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	//decode json string of items(json'd bc it has to be transferred as multipart)
 	try{
 		var items = JSON.parse(req.body.items);
+		var rawTags = JSON.parse(req.body.tags);
 	} catch(err) {
 		if(err) console.log(err);
 	}
@@ -94,13 +127,18 @@ app.post('/api/outfit', upload.any(), function(req, res){
 		images.push({ data: fs.readFileSync(item.path), contentType: item.mimetype });
 	});
 
+	var tags = [];
+	for(let i = 0; i < rawTags.length; i++){
+		tags.push({ tag: rawTags[i].text });
+	}
+
 	var userOutfit = new Outfit();
-	userOutfit.author = 'your\'s truley';
+	userOutfit.author = req.body.userID;
 	userOutfit.date = Date.now();
 	userOutfit.images = images;
 	userOutfit.items = items;
 	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
-	userOutfit.tags = [{ tag: 'frontpage' }];
+	userOutfit.tags = tags;
 
 	userOutfit.save(function(err, fluffy){
 		if (err) console.log(err);

@@ -10,7 +10,7 @@ class Outfit extends Component{
 		this.deleteOutfit = this.deleteOutfit.bind(this);
 		this.setImageFocus = this.setImageFocus.bind(this);
 		//focus denotes array pos of image to be enlarged
-		this.state = { outfit: { model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]}, focus: 0 };
+		this.state = { outfit: {author: '', model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]}, focus: 0 };
 	}
 
 	componentDidMount(){
@@ -44,7 +44,7 @@ class Outfit extends Component{
 	}
 
 	render(){
-		let { modelName, modelLink } = this.state.outfit;
+		let { modelName, modelLink, author } = this.state.outfit;
 		let modelInfo = null;
 
 		if(modelName && modelLink){
@@ -110,8 +110,8 @@ class Outfit extends Component{
 										</div>
 										<div className="col-md-9">
 											<div className="author_info">
-												<h4 className="display_name">James Kingsbury</h4>
-												<h5 className="username">@lakobos</h5>
+												<h4 className="display_name">{(author) ? <Link to={'/user/' + author}><p>{author}</p></Link> : <p>Info unavailable</p>}</h4>
+												<h5 className="username">{author}</h5>
 											</div>
 										</div>
 										</div>
@@ -123,7 +123,7 @@ class Outfit extends Component{
 						<div className="gallery">
 							<div className="row">
 								{(this.state.outfit.images.length < 2) ? <div></div> : this.state.outfit.images.map((image, index) => 
-								<div className="col-md-3">
+								<div key={index} className="col-md-3">
 									 <img alt="outfit thumbnail" className="img-responsive" key={index} src={'data:' + image.contentType + ';base64, ' + image.base64} onClick={() => this.setImageFocus(index)} />
 								</div>
 								)}

@@ -14,7 +14,7 @@ class Home extends Component {
 		    <div className="col-md-6"><div className="feature"><h3>Palace x Adidas<span className="spacer"></span></h3></div></div>
 		    <div className="col-md-6"><div className="feature"><h3>Palace x Adidas<span className="spacer"></span></h3></div></div>
 		  </div>
-		  <div className="row">
+		  <div className="row row-eq-height">
 		  	<div className="col-md-10"><ItemGrid tag="frontpage"/></div>
 		  	<div className="col-md-2 tall"><div id="email-funnel">Correct_Couture<input type="text"/></div></div>
 		  </div>
