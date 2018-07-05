@@ -1,5 +1,5 @@
 div.masonry{
-	margin: 0 auto;
+	margin: 0;
 }
 
 div.container-masonry{
@@ -14,16 +14,12 @@ nav#pagination ul{
   display: inline-block;
 }
 
-a.link-item{
-}
-
-.editor-item{
-	padding: 20px;
-}
-
 img.img-item{
-	width: 300px;
+	width: 330px;
 	height: auto;
+	padding: 2px 15px;
+	padding-left: 0px;
+	margin-top: 5px;
 }
 
 .glyphicon-heart{

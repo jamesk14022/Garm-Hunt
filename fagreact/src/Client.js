@@ -35,6 +35,10 @@ function postUser(user){
 	});
 }
 
+function getUserById(id){
+	return fetch(`http://localhost:5000/api/users/` + id);
+}
+
 function postOutfit(outfit){
 	var formData  = new FormData();
 	for(var name in outfit) {
@@ -62,5 +66,5 @@ function deleteOutfit(id){
 	});
 }
 
-const Client = { getOutfitById, getOutfitsByTag, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit };
+const Client = { getOutfitById, getOutfitsByTag, getUserById, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit };
 export default Client

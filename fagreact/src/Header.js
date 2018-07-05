@@ -8,7 +8,7 @@ class Header extends Component {
 
 constructor(props){
   super(props);
-  this.state = { username: '' };
+  this.state = { username: '', userid:'' };
   this.onFacebookLogin = this.onFacebookLogin.bind(this);
 }
 
@@ -16,20 +16,22 @@ onFacebookLogin(loginStatus, resultObject){
   console.log(resultObject)
   if (loginStatus === true) {
     this.setState({
-      username: resultObject.name
+      username: resultObject.name,
+      userid: resultObject.id
     });
     //pass state to app.js for route auth
     this.props.authChange(true, resultObject.id)
   } else {
     this.setState({
-      username: null
+      username: null,
+      userid: null
     });
     this.props.authChange(false)
   }
 }
 
 render() {
-let { username } = this.state;
+let { username, userid } = this.state;
 
 return (
 <div className="Header">
@@ -46,7 +48,7 @@ return (
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
       </button>
-      <Link className="navbar-brand" to={`/`} >Correct_Couture</Link>
+      <Link className="navbar-brand" to={`/`}>Correct_Couture <sub>(Beta)</sub></Link>
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">
@@ -55,11 +57,9 @@ return (
           <li><a><span className="link-fade"><button type="button" className="no-button metro">
         Welcome back, { username }</button></span></a></li>}
 
-        {username && 
-          <li><a><span className="link-fade"><button type="button" className="no-button metro">
-        My Account</button></span></a></li>}
-
-         <li><a><span className="link-fade"><button type="button" className="no-button metro">About Us</button></span></a></li>
+        {username && userid &&
+          <li><Link to={'/user/' + userid}><span className="link-fade"><button type="button" className="no-button metro">
+        My Account</button></span></Link></li>}
          
          {!username && 
           <li><a><span className="link-fade">
@@ -77,6 +77,7 @@ return (
          </span>
          </a></li>}
          
+         <li><a><span className="link-fade"><button type="button" className="no-button metro">About Us</button></span></a></li>
       </ul>
     </div>
   </div>

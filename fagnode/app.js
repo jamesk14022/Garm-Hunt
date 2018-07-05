@@ -82,6 +82,12 @@ app.get('/api/users/outfits/:user', function(req, res){
 	);
 });
 
+app.get('/api/users/:userid', function(req, res){
+	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
+		if (err) return console.log(err);
+		res.json(user);
+	});
+});
 //delivers a number of outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
@@ -93,9 +99,8 @@ app.get('/api/outfits', function(req, res){
 });
 
 app.post('/api/user', function(req, res){
-	console.log(req.body)
 	let { id, name } = req.body;
-	var userData = new User();
+	let userData = new User();
 	userData.facebook_id = id;
 	userData.full_name = name;
 

@@ -8,6 +8,7 @@ import Submit from './Submit';
 import Admin from './Admin';
 import Tag from './Tag';
 import User from './User';
+import PageNotFound from './PageNotFound';
 
 //component reserved for loggedin users
 //auth loguic needs brishing up here - insec
@@ -47,6 +48,7 @@ class App extends Component {
       <Route path='/user/:userid' component={User}/>
       <PrivateRoute path='/submit' component={Submit} logged={this.state.loggedIn} id={this.state.userID}/>
       <PrivateRoute path='/admin' component={Admin} logged={this.state.loggedIn}/>
+      <Route component={PageNotFound} />
     </Switch>
     <Footer />
     </div>

@@ -10,27 +10,36 @@ class Outfit extends Component{
 		this.deleteOutfit = this.deleteOutfit.bind(this);
 		this.setImageFocus = this.setImageFocus.bind(this);
 		//focus denotes array pos of image to be enlarged
-		this.state = { outfit: {author: '', model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}]}, focus: 0 };
+		this.state = { fullname : '', outfit: {author: '', model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}] }, focus: 0 };
+	}
+
+	updateOutfit(id){
+		Client.getOutfitById(id)
+			.then(response => response.json())
+	  		.then((body) => {
+	    		this.setState({ outfit: body });
+				if(body.author){
+					this.getAuthorFromId(body.author);
+				}
+  		});
 	}
 
 	componentDidMount(){
-		Client.getOutfitById(this.props.match.params.id)
-			.then(response => response.json())
-	  		.then((body) => {
-	    		console.log(body);
-	    		this.setState({ outfit: body });
-  		});
+		this.updateOutfit(this.props.match.params.id);
 	}
 
 	componentWillReceiveProps(newProps){
 		// handles change from (/outfit/xxx to /outfit/xxx)
-	  	Client.getOutfitById(newProps.match.params.id)
-	    .then(response => response.json())
-		.then((body) => {
-			console.log(body);
-			this.setState({ outfit: body });
-		});
+	  	this.updateOutfit(newProps.match.params.id);
 		window.scrollTo(0,0);
+	}
+
+	getAuthorFromId(id){
+		Client.getUserById(id)
+		.then(response => response.json())
+		.then((body) => {
+			this.setState({ fullname: body[0].full_name});
+		});
 	}
 
 	//sets image to be englarged
@@ -45,7 +54,15 @@ class Outfit extends Component{
 
 	render(){
 		let { modelName, modelLink, author } = this.state.outfit;
+		let authorName = this.state.fullname || author;
+		let tag = 'frontpage';
 		let modelInfo = null;
+
+		if( typeof this.state.outfit.tags[0] === 'undefined'){
+			let tag = 'frontpage';
+		}else{
+			let tag = this.state.outfit.tags[0].tag;
+		}
 
 		if(modelName && modelLink){
 			modelInfo = <Link to={ modelLink }><p>{ modelName }</p></Link>;
@@ -110,7 +127,7 @@ class Outfit extends Component{
 										</div>
 										<div className="col-md-9">
 											<div className="author_info">
-												<h4 className="display_name">{(author) ? <Link to={'/user/' + author}><p>{author}</p></Link> : <p>Info unavailable</p>}</h4>
+												<h4 className="display_name">{(author) ? <Link to={'/user/' + author}><p>{authorName}</p></Link> : <p>Info unavailable</p>}</h4>
 												<h5 className="username">{author}</h5>
 											</div>
 										</div>
@@ -134,12 +151,14 @@ class Outfit extends Component{
 				<div className="suggested-items">
 					<div className="row">
 					<div className="col-md-12">
-						<h2>More from {this.state.outfit.tags[0].tag}</h2>
+						<h2>More from { tag }</h2>
 						<hr />
 					</div>
 					</div>
 					<div className="row">
-						<ItemGrid tag={this.state.outfit.tags[0].tag}/>
+						<div className="col-md-12">
+							<ItemGrid tag={ tag }/>
+						</div>
 					</div>
 				</div>
 			</div>

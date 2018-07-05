@@ -2,3 +2,11 @@ div.Footer li.list-inline-item{
 	margin-right: 30px;
 	font-weight: 500;
 }
+
+div.container-feature{
+	margin: 0px 300px;
+}
+
+div.container-feature {
+	padding: 0px;
+}

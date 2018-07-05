@@ -13,31 +13,9 @@ constructor(props){
   this.setPage = this.setPage.bind(this);
 }
 
-componentDidMount(){
-  this.setState({ loading: true });
-  if(this.props.tag){
-  Client.getOutfitsByTag(this.props.tag)
-  .then(response => response.json())
-    .then((body) => {
-      var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
-      this.setState({'outfits':  multiOutfits});
-      let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
-      this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
-  })}else if(this.props.user){
-      Client.getOutfitsByUser(this.props.user)
-      .then(response => response.json())
-        .then((body) => {
-          var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
-          this.setState({'outfits':  multiOutfits});
-          let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
-          this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
-      })
-    }
-}
-
-componentWillReceiveProps(nextProps){
-if(nextProps.tag){
-Client.getOutfitsByTag(nextProps.tag)
+populateGrid(tag, user){
+  if(tag){
+  Client.getOutfitsByTag(tag)
   .then(response => response.json())
     .then((body) => {
       var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
@@ -45,7 +23,26 @@ Client.getOutfitsByTag(nextProps.tag)
       let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
       this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
   })
+  }else if(user){
+    Client.getOutfitsByUser(user)
+      .then(response => response.json())
+        .then((body) => {
+          var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
+          this.setState({'outfits':  multiOutfits});
+          let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+          this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
+      })
+  }
 }
+
+componentDidMount(){
+  this.setState({ loading: true });
+  this.populateGrid(this.props.tag, this.props.user);
+}
+
+componentWillReceiveProps(nextProps){
+  this.setState({ loading: true });
+  this.populateGrid(nextProps.tag, nextProps.user);
 }
 
 
@@ -61,7 +58,8 @@ render() {
   let allOutfits = [...this.state.outfits];
   let outfitsToRender = allOutfits.slice(this.state.pagination.itemsPerPage * (currentPage - 1), this.state.pagination.itemsPerPage * currentPage);
   let masonryOptions = {
-      transitionDuration: 0
+      transitionDuration: 0,
+      gutter: 0
   };
 
   if(currentPage !== 1){ 
