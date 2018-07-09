@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom'
 import Client from './Client.js';
 import Dropzone from 'react-dropzone';
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -8,7 +9,7 @@ class Submit extends Component{
   constructor(props) {
     super(props);
     console.log(props)
-    this.state = { inputs: ['input-0'], images: [], tags: [], suggestions: [] };
+    this.state = { errors: '', inputs: ['input-0'], images: [], tags: [], suggestions: [], items: [] };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTagDelete = this.handleTagDelete.bind(this);
@@ -17,7 +18,7 @@ class Submit extends Component{
   }
 
   parseItemInputs(outfit){
-  	var items = [];
+  var items = [];
 	Object.keys(outfit).forEach(function(key,index) {
 		let lastChar = key[key.length -1];
 	    if(key.substring(0,9) === 'linkinput'){
@@ -28,11 +29,7 @@ class Submit extends Component{
 	    	items.push(item);
 	    }
 	});
-	return JSON.stringify(items);
-  }
-
-  parseTags(tags){
-  	return JSON.stringify(tags);
+	return items;
   }
 
   handleChange(event) {
@@ -45,21 +42,37 @@ class Submit extends Component{
     });
   }
 
-
   onImageDrop(files) {
     this.setState({
     	images: this.state.images.concat(files)
     });
+
+    console.log(files)
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    var outfit = this.state;
-    outfit.items = this.parseItemInputs(this.state);
-    outfit.tags = this.parseTags(this.state.tags);
-    outfit.userID = this.props.id;
-    Client.postOutfit(outfit);
+    //deep copy
+    var outfit = JSON.parse(JSON.stringify(this.state));
+
+    outfit.items = JSON.parse(JSON.stringify(this.parseItemInputs(this.state)));
+    console.log(outfit);
+
+    if(!outfit.images.length || !outfit.items[0]){
+        this.setState({ errors: 'Please fill in all fields marked with an asterisk. e1'});
+    }else{
+      if(outfit.items[0].url && outfit.items[0].name){
+        outfit.tags = JSON.stringify(this.state.tags);
+        outfit.items = JSON.stringify(outfit.items);
+        outfit.userID = this.props.id;
+        this.setState({ errors: ''});
+        Client.postOutfit(outfit);
+         this.props.history.push("/success");
+      }else{
+        this.setState({ errors: 'Please fill in all fields marked with an asterisk. e2'});
+      }
+    }
   }
 
   appendInput(){
@@ -104,7 +117,7 @@ class Submit extends Component{
   		'borderStyle': 'dashed',
   		'borderRadius': '5px',
   		'textAlign': 'center',
-  		'paddingTop': '50px'
+  		'paddingTop': '80px'
   	}
 
     return (
@@ -113,23 +126,23 @@ class Submit extends Component{
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
       <fieldset>
 
-		<legend>Submit an Outfit</legend>
+		<legend><h2>Submit an Outfit</h2></legend>
 
 		<div id="dynamicItemInputs">
 			{this.state.inputs.map(function(submission){
                 return (
                 <div className="dynamicItem" key={submission}>
 			     <div className="form-group">
-			     <label className="col-md-4 control-label" htmlFor="textinput">Item Name</label>  
+			     <label className="col-md-4 control-label" htmlFor="textinput">Item Name <sup>*</sup></label>  
 				  <div className="col-md-4">
-				  	<input id={'name' + submission } name={'name' + submission } type="text" placeholder="" className="form-control input-md" onChange={this.handleChange} />
+				  	<input id={'name' + submission } name={'name' + submission } type="text" placeholder="Oki Tori Sweatshirt - Black Cotton" className="form-control input-md" onChange={this.handleChange} />
 				  </div>
 				</div>
 
 				<div className="form-group">
-				<label className="col-md-4 control-label" htmlFor="textinput">Item Link</label>  
+				<label className="col-md-4 control-label" htmlFor="textinput">Item Link <sup>*</sup></label>  
 				<div className="col-md-4">
-				  <input id={'link' + submission } name={'link' + submission } type="text" placeholder="" className="form-control input-md" onChange={this.handleChange} />
+				  <input id={'link' + submission } name={'link' + submission } type="text" placeholder="https://axelarigato.com/uk/men/clothing/sweaters/oki-tori-sweater-10115" className="form-control input-md" onChange={this.handleChange} />
 				  </div>
 				</div>
 				</div>
@@ -166,7 +179,8 @@ class Submit extends Component{
 		      style={dropzoneStyle}
 		      onDrop={this.onImageDrop.bind(this)}
 		    >
-		      <p>Drop an image or click to select a file to upload.</p>
+		    <p className="dropzone-text" >Drop an image here or click to select images to upload. <sup>*</sup></p>
+        <p>Images currently uploaded: {this.state.images.length}</p>
 		    </Dropzone>
 		    </div>
 	    </div>
@@ -186,9 +200,15 @@ class Submit extends Component{
 	    	</div>
 	    </div>
 
+    <div className="form-group">
+      <div className="col-md-4 col-md-offset-4">
+        <p className="errors">{ this.state.errors }</p>
+      </div>
+    </div>
+
 		<div className="form-group">
 		  <div className="col-md-4 col-md-offset-4">
-		    <button type="submit" className="btn btn-primary">Submit</button>
+		    <button type="submit" className="btn btn-primary btn-lg btn-submit">Submit Item</button>
 		  </div>
 		</div>
 

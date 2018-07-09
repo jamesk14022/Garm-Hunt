@@ -4,14 +4,14 @@ import './resources/css/pagenotfound.css';
 
 const PageNotFound = props => (
 	<div className="PageNotFound">
-		<div class="container">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="error-template">
+		<div className="container">
+	    <div className="row">
+	        <div className="col-md-12">
+	            <div className="error-template">
 	                <h2>Oops! 404 Not Found</h2>
-	                <div class="error-details">Sorry, an error has occured, Requested page not found!</div>
-	                <div class="error-actions">
-	                    <Link to='/' class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>Take Me Home</Link>
+	                <div className="error-details">Sorry, an error has occured, Requested page not found!</div>
+	                <div className="error-actions">
+	                    <Link to='/' className="btn btn-primary btn-lg"><span className="glyphicon glyphicon-home"></span>Take Me Home</Link>
 	                </div>
 	            </div>
 	        </div>

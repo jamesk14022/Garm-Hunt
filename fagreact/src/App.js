@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Home from './Home';
 import Outfit from './Outfit';
 import Submit from './Submit';
+import SubmitSuccess from './SubmitSuccess';
 import Admin from './Admin';
 import Tag from './Tag';
 import User from './User';
@@ -46,6 +47,7 @@ class App extends Component {
       <Route path='/outfit/:id' component={Outfit}/>
       <Route path='/tag/:tag' component={Tag}/>
       <Route path='/user/:userid' component={User}/>
+      <PrivateRoute path='/success' component={SubmitSuccess} logged={this.state.loggedIn}/>
       <PrivateRoute path='/submit' component={Submit} logged={this.state.loggedIn} id={this.state.userID}/>
       <PrivateRoute path='/admin' component={Admin} logged={this.state.loggedIn}/>
       <Route component={PageNotFound} />
