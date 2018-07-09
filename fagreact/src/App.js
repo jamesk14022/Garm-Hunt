@@ -10,7 +10,7 @@ import Tag from './Tag';
 import User from './User';
 import PageNotFound from './PageNotFound';
 
-//component reserved for loggedin users
+//hoc reserved for loggedin users
 //auth loguic needs brishing up here - insec
 const PrivateRoute = ({ component: Component, logged: loggedIn, id: Id, ...rest }) => (
   <Route {...rest} render={(props) => (
