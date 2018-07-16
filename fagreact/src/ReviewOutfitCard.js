@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewOutfitCard = ({ id, images, uploader, items, approvalCallback }) => (
 	<div className="ReviewOutfitCard">

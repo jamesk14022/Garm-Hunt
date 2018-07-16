@@ -123,72 +123,73 @@ class Submit extends Component{
     return (
     <div className="Submit">
     <div className="container">
-    <form className="form-horizontal" onSubmit={this.handleSubmit}>
+    <div className="row">
+     <legend><h2>Submit an Outfit</h2></legend>
+      <div className="col-md-8 col-sm-12 col-xs-12">
+            <form className="form-horizontal" onSubmit={this.handleSubmit}>
       <fieldset>
 
-		<legend><h2>Submit an Outfit</h2></legend>
-
-		<div id="dynamicItemInputs">
-			{this.state.inputs.map(function(submission){
+    <div id="dynamicItemInputs">
+      {this.state.inputs.map(function(submission){
                 return (
                 <div className="dynamicItem" key={submission}>
-			     <div className="form-group">
-			     <label className="col-md-4 control-label" htmlFor="textinput">Item Name <sup>*</sup></label>  
-				  <div className="col-md-4">
-				  	<input id={'name' + submission } name={'name' + submission } type="text" placeholder="Oki Tori Sweatshirt - Black Cotton" className="form-control input-md" onChange={this.handleChange} />
-				  </div>
-				</div>
+           <div className="form-group">
+           <label className="col-md-3 control-label" htmlFor="textinput">Item Name <sup>*</sup></label>  
+          <div className="col-md-7">
+            <input id={'name' + submission } name={'name' + submission } type="text" placeholder="Oki Tori Sweatshirt - Black Cotton" className="form-control input-md" onChange={this.handleChange} />
+          </div>
+        </div>
 
-				<div className="form-group">
-				<label className="col-md-4 control-label" htmlFor="textinput">Item Link <sup>*</sup></label>  
-				<div className="col-md-4">
-				  <input id={'link' + submission } name={'link' + submission } type="text" placeholder="https://axelarigato.com/uk/men/clothing/sweaters/oki-tori-sweater-10115" className="form-control input-md" onChange={this.handleChange} />
-				  </div>
-				</div>
-				</div>
+        <div className="form-group">
+        <label className="col-md-3 control-label" htmlFor="textinput">Item Link <sup>*</sup></label>  
+        <div className="col-md-7">
+          <input id={'link' + submission } name={'link' + submission } type="text" placeholder="https://axelarigato.com/uk/men/clothing/sweaters/oki-tori-sweater-10115" className="form-control input-md" onChange={this.handleChange} />
+          </div>
+        </div>
+        </div>
                 );
            }, this)}
-		</div>
+    </div>
 
-		<div className="form-group">
-		  <div className="col-md-4 col-md-offset-4">
-		    <button type="button" className="btn btn-primary" onClick={ () => this.appendInput() }>Add another item</button>
-		  </div>
-		</div>
+    <div className="form-group">
+      <div className="col-md-7 col-md-offset-3">
+        <button type="button" className="btn btn-primary" onClick={ () => this.appendInput() }>Add another item</button>
+      </div>
+    </div>
 
-		<div className="form-group">
-		  <label className="col-md-4 control-label" htmlFor="textinput">Model Name</label>  
-		  <div className="col-md-4">
-		  <input id="modelName" name="modelName" type="text" placeholder="Jorga Smith" className="form-control input-md"onChange={this.handleChange} />
-		  </div>
-		</div>
+    <div className="form-group">
+      <label className="col-md-3 control-label" htmlFor="textinput">Model Name</label>  
+      <div className="col-md-7">
+      <input id="modelName" name="modelName" type="text" placeholder="Jorga Smith" className="form-control input-md"onChange={this.handleChange} />
+      </div>
+    </div>
 
-		<div className="form-group">
-		  <label className="col-md-4 control-label" htmlFor="textinput">Model Link</label>  
-		  <div className="col-md-4">
-		  <input id="modelLink" name="modelLink" type="text" placeholder="https://www.instagram.com/jorjasmith_" className="form-control input-md" onChange={this.handleChange}/>
-		  </div>
-		</div>
+    <div className="form-group">
+      <label className="col-md-3 control-label" htmlFor="textinput">Model Link</label>  
+      <div className="col-md-7">
+      <input id="modelLink" name="modelLink" type="text" placeholder="https://www.instagram.com/jorjasmith_" className="form-control input-md" onChange={this.handleChange}/>
+      </div>
+    </div>
 
-		<div className="form-group">
-			<div className="col-md-4 col-md-offset-4">
-		    <Dropzone
-		      name="image"
-		      multiple={false}
-		      accept="image/*"
-		      style={dropzoneStyle}
-		      onDrop={this.onImageDrop.bind(this)}
-		    >
-		    <p className="dropzone-text" >Drop an image here or click to select images to upload. <sup>*</sup></p>
+    <div className="form-group">
+      <div className="col-md-7 col-md-offset-3">
+        <Dropzone
+          name="image"
+          multiple={false}
+          accept="image/*"
+          style={dropzoneStyle}
+          onDrop={this.onImageDrop.bind(this)}
+        >
+        <p className="dropzone-text" >Drop an image here or click to select images to upload. <sup>*</sup></p>
         <p>Images currently uploaded: {this.state.images.length}</p>
-		    </Dropzone>
-		    </div>
-	    </div>
+        </Dropzone>
+        </div>
+      </div>
 
-	    <div className="form-group">
-	    	<label className="col-md-4 control-label" htmlFor="textinput">Tags</label> 
-	    	<div className="col-md-4">
-	    		<ReactTags 
+      <div className="form-group">
+        <label className="col-md-3 control-label" htmlFor="textinput">Tags</label> 
+        <div className="col-md-7">
+          <ReactTags 
             tags={tags}
             suggestions={suggestions}
             classNames={{ tagInputField: 'form-control input-md tag-input', tag: 'enteredTags', remove: 'removeTag'}}
@@ -197,23 +198,37 @@ class Submit extends Component{
             handleAddition={this.handleTagAddition}
             handleDrag={this.handleTagDrag} 
           />
-	    	</div>
-	    </div>
+        </div>
+      </div>
 
     <div className="form-group">
-      <div className="col-md-4 col-md-offset-4">
+      <div className="col-md-7 col-md-offset-3">
         <p className="errors">{ this.state.errors }</p>
       </div>
     </div>
 
-		<div className="form-group">
-		  <div className="col-md-4 col-md-offset-4">
-		    <button type="submit" className="btn btn-primary btn-lg btn-submit">Submit Item</button>
-		  </div>
-		</div>
+    <div className="form-group">
+      <div className="col-md-7 col-md-offset-3">
+        <button type="submit" className="btn btn-primary btn-lg btn-submit">Submit Item</button>
+      </div>
+    </div>
 
-	</fieldset>
+  </fieldset>
     </form>
+      </div>
+      <div className="col-md-4 hidden-sm hidden-xs">
+        <div id="tips">
+          <h3>Tips for Submitting an Outfit</h3>
+          <ul>
+            <li>Submit links for two or more items in your outfit.</li>
+            <li>Try to link directly to a page where the item can be bought, preferrably in GBP Sterling.</li>
+            <li>Add your corporate or personal instagram for added visability.</li>
+            <li>Remember to credit the model if you know who they are.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
     </div>
     </div>
     );

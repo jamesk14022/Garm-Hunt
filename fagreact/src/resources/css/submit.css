@@ -36,3 +36,17 @@ p.errors{
 	color: red;
 	font-size: 16px;
 }
+
+div#tips h3{
+    text-decoration: underline solid #337ab7;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+div#tips p{
+	font-size: 25px;
+}
+
+div#tips li{
+	margin-bottom: 5px;
+}

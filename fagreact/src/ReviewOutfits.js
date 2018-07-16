@@ -7,7 +7,7 @@ const ReviewOutfits = ({ outfits,  ...otherProps}) => (
 	<div className="row">
 		{outfits.map((outfit) =>
 			<div className="col-md-2">
-				<ReviewOutfitCard {...otherProps} outfit={ ...outfit } />
+				<ReviewOutfitCard {...otherProps} outfit={ outfit } />
 			</div>
 		)}
 	</div>
