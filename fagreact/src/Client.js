@@ -1,3 +1,18 @@
+function getUnapprovedOutfits(limit){
+	let data = {
+		limit: limit
+	}
+	return fetch(`http://localhost:5000/api/outfits/unapproved`, {
+		body: data 
+	});
+}
+
+// change the status of an outfit from unapproved to approved
+// using outfit id as selector
+function changeApprovalState(id){
+	return fetch(`http://localhost:5000/api/outfits/reassign/` + id);
+}
+
 function getOutfitById(id){
   return fetch(`http://localhost:5000/api/outfits/` + id);
 }

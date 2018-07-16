@@ -60,7 +60,7 @@ class Submit extends Component{
     console.log(outfit);
 
     if(!outfit.images.length || !outfit.items[0]){
-        this.setState({ errors: 'Please fill in all fields marked with an asterisk. e1'});
+        this.setState({ errors: 'Please fill in all fields marked with an asterisk.'});
     }else{
       if(outfit.items[0].url && outfit.items[0].name){
         outfit.tags = JSON.stringify(this.state.tags);
@@ -70,7 +70,7 @@ class Submit extends Component{
         Client.postOutfit(outfit);
          this.props.history.push("/success");
       }else{
-        this.setState({ errors: 'Please fill in all fields marked with an asterisk. e2'});
+        this.setState({ errors: 'Please fill in all fields marked with an asterisk.'});
       }
     }
   }

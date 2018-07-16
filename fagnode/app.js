@@ -33,7 +33,8 @@ const outfitSchema = new mongoose.Schema({
 	items: [{ name: String, url: String }],
 	tags: [{ tag: String }],
 	features: [{ tag: String}],
-	model: { name: String, url: String}
+	model: { name: String, url: String}, 
+	accepted: Boolean
 });
 
 const userSchema = new mongoose.Schema({
@@ -56,6 +57,7 @@ function convertImageData(outfits){
 }
 
 //get specific outfit based on Id
+//can access both approved and unapproved items this way, potential secuity issue?
 app.get('/api/outfits/:outfitId', function(req, res){
 	Outfit.find({ _id: req.params.outfitId }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
@@ -66,7 +68,7 @@ app.get('/api/outfits/:outfitId', function(req, res){
 
 //returns an array of outfits based on tag
 app.get('/api/tags/outfits/:tag', function(req, res){
-	Outfit.find({ 'tags.tag': req.params.tag }).lean().exec(function(err, outfit){
+	Outfit.find({$and: [{ 'tags.tag': req.params.tag }, { accepted: true }]}).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
@@ -75,29 +77,50 @@ app.get('/api/tags/outfits/:tag', function(req, res){
 
 //returns an array of outfits based on user
 app.get('/api/users/outfits/:user', function(req, res){
-	Outfit.find({ 'author': req.params.user }).lean().exec(function(err, outfit){
+	Outfit.find({ $and: [{ 'author': req.params.user }, { accepted: true }] }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
 	);
 });
 
+//returns user based on id
 app.get('/api/users/:userid', function(req, res){
 	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
 		if (err) return console.log(err);
 		res.json(user);
 	});
 });
-//delivers a number of outfits, defaulting to 6
+
+//delivers a number of approved outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
-	Outfit.find().limit(limit).lean().exec(function(err, outfit){
+	Outfit.find({ accepted: true }).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
 	);
 });
 
+//delivers a number of unapproved outfits, defaulting to 6
+app.get('/api/outfits/unapproved', function(req, res){
+	let limit = parseInt(req.body.limit) || 6;
+	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
+		if (err) return console.log(err);
+		res.json(convertImageData(outfit));
+	}
+	);
+});
+
+//reassign an outfit from unapproved to approved
+app.get('/api/outfits/reassign/:outfitId', function(req, res){
+	Outfit.update({ _id: req.params.outfitId )}, {
+	  if (err) return console.log(err);	
+	  accepted: true
+	})
+});
+
+//add a new user
 app.post('/api/user', function(req, res){
 	let { id, name } = req.body;
 	let userData = new User();
@@ -144,6 +167,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	userOutfit.items = items;
 	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
 	userOutfit.tags = tags;
+	userOutfit.accepted = false;
 
 	userOutfit.save(function(err, fluffy){
 		if (err) console.log(err);
@@ -151,6 +175,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 });
 
 //delete an outfit from the app based on id
+//works on all outfits
 app.delete('/api/outfits/:outfitId', function(req, res){
 	Outfit.findOneAndRemove({ _id: req.params.outfitId }, function(err, response){
 		if (err) console.log(err);
