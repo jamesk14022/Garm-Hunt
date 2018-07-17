@@ -77,7 +77,7 @@ return (
          </span>
          </a></li>}
          
-         <li><a><span className="link-fade"><button type="button" className="no-button metro">About Us</button></span></a></li>
+         <li><Link to={'/about/'}><span className="link-fade"><button type="button" className="no-button metro">About Us</button></span></Link></li>
       </ul>
     </div>
   </div>

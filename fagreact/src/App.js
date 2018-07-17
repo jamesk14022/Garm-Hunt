@@ -9,6 +9,7 @@ import SubmitSuccess from './SubmitSuccess';
 import Admin from './Admin';
 import Tag from './Tag';
 import User from './User';
+import About from './About';
 import PageNotFound from './PageNotFound';
 
 //hoc reserved for loggedin users
@@ -47,6 +48,7 @@ class App extends Component {
       <Route path='/outfit/:id' component={Outfit}/>
       <Route path='/tag/:tag' component={Tag}/>
       <Route path='/user/:userid' component={User}/>
+      <Route path='/about' component={About}/>
       <PrivateRoute path='/success' component={SubmitSuccess} logged={this.state.loggedIn}/>
       <PrivateRoute path='/submit' component={Submit} logged={this.state.loggedIn} id={this.state.userID}/>
       <PrivateRoute path='/admin' component={Admin} logged={this.state.loggedIn}/>

@@ -27,7 +27,7 @@ const URL = require('url');
 
 const outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
-	author: String,
+	author: { id: String, fullName: String },
 	date: Date,
 	images: [{ data: Buffer, contentType: String }],
 	items: [{ name: String, url: String }],
@@ -54,6 +54,18 @@ function convertImageData(outfits){
 		}
 	});
 	return outfits;
+}
+
+//returns full author name based on id
+function getFullFromId(){
+	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
+		if (err) return console.log(err);
+		if(user){
+			return user;
+		}else{
+			return null;
+		}
+	});
 }
 
 //get specific outfit based on Id
@@ -86,10 +98,7 @@ app.get('/api/users/outfits/:user', function(req, res){
 
 //returns user based on id
 app.get('/api/users/:userid', function(req, res){
-	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
-		if (err) return console.log(err);
-		res.json(user);
-	});
+	res.json(getFullFromId(req.params.id));
 });
 
 //delivers a number of approved outfits, defaulting to 6
@@ -161,7 +170,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	}
 
 	var userOutfit = new Outfit();
-	userOutfit.author = req.body.userID;
+	userOutfit.author = { id: req.body.userID, fullName: getFullFromId(req.body.userID) };
 	userOutfit.date = Date.now();
 	userOutfit.images = images;
 	userOutfit.items = items;
