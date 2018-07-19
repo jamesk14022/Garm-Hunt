@@ -126,8 +126,10 @@ app.get('/api/outfits', function(req, res){
 
 //delivers a number of unapproved outfits, defaulting to 6
 app.get('/api/outfits/unapproved', function(req, res){
+	console.log('trig1')
 	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
+			console.log('trig2')
 		if (err) return console.log(err);
 		console.log(convertImageData(outfit));
 		res.json({ test: 'test'});
