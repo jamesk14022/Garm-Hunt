@@ -114,6 +114,12 @@ app.get('/api/users/:userid', function(req, res){
 	res.json(getFullFromId(req.params.id));
 });
 
+app.get('/ap', function(req, res){
+	res.json({ test: 'test' }});
+});
+
+
+
 //delivers a number of approved outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
@@ -209,6 +215,6 @@ app.delete('/api/outfits/:outfitId', function(req, res){
 	});
 });
 
-app.listen(process.env.PORT || 8080, function(){
+app.listen(8080, function(){
 	console.log('API listening for connnections. t');
 });

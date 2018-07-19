@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://smallbrandserver.herokuapp.com:8080/",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",
