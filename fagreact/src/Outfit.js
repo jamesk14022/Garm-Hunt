@@ -38,13 +38,13 @@ class Outfit extends Component{
 				<div className="suggested-items">
 					<div className="row">
 					<div className="col-md-12">
-						<h2>More from { tag }</h2>
+						<h2>More from { this.state.outfit.tags[0].tag }</h2>
 						<hr />
 					</div>
 					</div>
 					<div className="row">
 						<div className="col-md-12">
-							<ItemGrid tag={ tag }/>
+							<ItemGrid tag={ this.state.outfit.tags[0].tag }/>
 						</div>
 					</div>
 				</div>

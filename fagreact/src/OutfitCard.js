@@ -15,8 +15,8 @@ class OutfitCard extends Component{
 	} 
 
 	render(){
+	let { author, model, items, images, tags, focus } = this.props;	
 	return(
-	let { author, model, items, images, tags, focus } = this.props;
 
 		<div className="OutfitCard">
 		<div className="row">
@@ -57,7 +57,7 @@ class OutfitCard extends Component{
 				<div className="row equal">
 					<div className="col-md-6">
 						<div id="model">
-							{ modelInfo }
+							{ model.url }
 						</div>
 					</div>
 					<div className="col-md-6 author">
