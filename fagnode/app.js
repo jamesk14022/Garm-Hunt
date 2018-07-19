@@ -130,7 +130,7 @@ app.get('/api/outfits/unapproved', function(req, res){
 	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		console.log(convertImageData(outfit));
-		res.json({ test: 'test'}});
+		res.json({ test: 'test'});
 	}
 	);
 });
