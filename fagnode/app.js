@@ -17,14 +17,13 @@ var multer = require('multer');
 var upload = multer({ dest: 'upload/'});
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/agg');
+mongoose.connect('mongodb://heroku_r09ljrwl:tjtjogjpuaa8sfiemk7a8rdop5@ds141221.mlab.com:41221/heroku_r09ljrwl');
 var shortid = require('shortid');
 
 var path = require('path');
 var fs = require('fs');
 
 const URL = require('url');
-
 const outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
 	author: { id: String, fullName: String },
@@ -123,8 +122,7 @@ app.get('/api/outfits/unapproved', function(req, res){
 
 //reassign an outfit from unapproved to approved
 app.get('/api/outfits/reassign/:outfitId', function(req, res){
-	Outfit.update({ _id: req.params.outfitId )}, {
-	  if (err) return console.log(err);	
+	Outfit.update({ _id: req.params.outfitId }, {
 	  accepted: true
 	})
 });
@@ -191,6 +189,6 @@ app.delete('/api/outfits/:outfitId', function(req, res){
 	});
 });
 
-app.listen(5000, function(){
+app.listen(process.env.PORT || 8080, function(){
 	console.log('API listening for connnections.');
 });
