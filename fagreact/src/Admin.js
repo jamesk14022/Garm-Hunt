@@ -12,7 +12,14 @@ constructor(props){
 
 getServerOutfits(){
 	Client.getUnapprovedOutfits()
-	.then(response => response.json())
+	.then((response) => {
+	  // In this case, we check the content-type of the response
+	  if (response.type === 'cors') {
+	    return [];
+	  }else{
+	  	return response.json();
+	  }
+	 })
     .then((body) => {
       this.setState({'outfits':  body});
   	})
@@ -28,7 +35,7 @@ outfitApprovalListener(id, approved){
 	}else{
 		Client.deleteOutfit(id);
 	}
-	this.getServerOutfits;
+	this.getServerOutfits();
 }
 
 render() {

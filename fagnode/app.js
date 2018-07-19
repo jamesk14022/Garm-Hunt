@@ -154,9 +154,12 @@ app.post('/api/user', function(req, res){
 		if(count === 0){
 			userData.save(function(err, fluffy){
 				if (err) console.log(err);
+				res.end();
 			});
 		}
 	});
+
+	res.end();
 
 });
 
