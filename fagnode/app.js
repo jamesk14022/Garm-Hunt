@@ -7,12 +7,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type : 'application/vnd.api+json'}));
 
 var cors = require('cors');
-var corsOptions = {
-  origin: false,
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
-}
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 var multer = require('multer');
 var upload = multer({ dest: 'upload/'});
