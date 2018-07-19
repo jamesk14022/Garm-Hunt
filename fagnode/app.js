@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader("Access-Control-Allow-Headers", "content-type, Content-Type, Accept");
 
     if ( req.method === 'OPTIONS' ) {
         console.log('OPTIONS SUCCESS');
@@ -130,6 +130,7 @@ app.get('/api/outfits/unapproved', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
+		console.log(convertImageData(outfit));
 		res.json(convertImageData(outfit));
 	}
 	);
