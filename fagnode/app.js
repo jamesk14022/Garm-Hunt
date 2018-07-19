@@ -203,5 +203,5 @@ app.delete('/api/outfits/:outfitId', function(req, res){
 });
 
 app.listen(process.env.PORT || 8080, function(){
-	console.log('API listening for connnections.');
+	console.log('API listening for connnections. t');
 });
