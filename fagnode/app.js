@@ -115,7 +115,7 @@ app.get('/api/users/:userid', function(req, res){
 });
 
 app.get('/ap', function(req, res){
-	res.json({ test: 'test' }});
+	res.json({ test: 'test' });
 });
 
 
