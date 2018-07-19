@@ -18,6 +18,11 @@ app.use(function (req, res, next) {
     // Request headers you wish to allow
     res.setHeader("Access-Control-Allow-Headers", "content-type");
 
+    if ( req.method === 'OPTIONS' ) {
+        console.log('OPTIONS SUCCESS');
+        res.end();
+    }
+
     // Pass to next layer of middleware
     next();
 });
