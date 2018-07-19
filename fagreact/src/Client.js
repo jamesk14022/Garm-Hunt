@@ -2,7 +2,7 @@ function getUnapprovedOutfits(limit){
 	let data = {
 		limit: limit
 	}
-	return fetch(`http://smallbrandserver.herokuapp.com/api/outfits/unapproved`, {
+	return fetch(`http://smallbrandserver.herokuapp.com/api/outfits/unapproved/`, {
 		body: data 
 	});
 }
@@ -81,5 +81,5 @@ function deleteOutfit(id){
 	});
 }
 
-const Client = { getOutfitById, getOutfitsByTag, getUserById, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit };
+const Client = { getOutfitById, getOutfitsByTag, getUserById, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit, getUnapprovedOutfits };
 export default Client

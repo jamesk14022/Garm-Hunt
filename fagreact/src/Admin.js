@@ -5,7 +5,7 @@ import Client from './Client';
 class Admin extends Component {
 constructor(props){
   super(props);
-  this.state = {};
+  this.state = { outfits:[] };
 
   this.getServerOutfits = this.getServerOutfits.bind(this);
 }
@@ -37,7 +37,7 @@ render() {
 	<div className="container">
 	  <h2>Admin area</h2>
 	  <hr />
-	  <ReviewOutfits { ...this.state.outfits } approvalCallback={this.outfitApprovalListener.bind(this)} />
+	  <ReviewOutfits outfits={ this.state.outfits } approvalCallback={this.outfitApprovalListener.bind(this)} />
 	</div>
 	</div>
 	);

@@ -53,8 +53,8 @@ function convertImageData(outfits){
 }
 
 //returns full author name based on id
-function getFullFromId(){
-	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
+function getFullFromId(id){
+	User.find({ facebook_id: id }).lean().exec(function(err, user){
 		if (err) return console.log(err);
 		if(user){
 			return user;
