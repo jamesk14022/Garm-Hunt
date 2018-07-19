@@ -12,17 +12,10 @@ constructor(props){
 
 getServerOutfits(){
 	Client.getUnapprovedOutfits()
-	.then((response) => {
-	  // In this case, we check the content-type of the response
-	  if (response.type === 'cors') {
-	    return [];
-	  }else{
-	  	return response.json();
-	  }
-	 })
-    .then((body) => {
-      this.setState({'outfits':  body});
-  	})
+	.then(response => response.json())
+  	.then(responseJson => {
+    console.log(responseJson);
+})
 }
 
 componentDidMount(){

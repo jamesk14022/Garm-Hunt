@@ -19,7 +19,6 @@ app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "content-type, Content-Type, Accept");
 
     if ( req.method === 'OPTIONS' ) {
-        console.log('OPTIONS SUCCESS');
         res.end();
     }else{
 	    // Pass to next layer of middleware
@@ -131,7 +130,7 @@ app.get('/api/outfits/unapproved', function(req, res){
 	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		console.log(convertImageData(outfit));
-		res.json(convertImageData(outfit));
+		res.json({ test: 'test'}});
 	}
 	);
 });

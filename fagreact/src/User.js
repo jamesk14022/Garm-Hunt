@@ -16,7 +16,15 @@ class User extends Component{
 
 	getNameFromId(){
 		Client.getUserById(this.props.match.params.userid)
-			.then(response => response.json())
+			.then((response) => {
+			  // In this case, we check the content-type of the response
+			  if (response.type === 'cors') {
+			  	console.log(response);
+			    return [];
+			  }else{
+			  	return response.json();
+			  }
+			 })
 			.then((body) => {
 				this.setState({ fullname: body[0].full_name});
 			});
