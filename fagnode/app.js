@@ -21,10 +21,10 @@ app.use(function (req, res, next) {
     if ( req.method === 'OPTIONS' ) {
         console.log('OPTIONS SUCCESS');
         res.end();
-    }
-
-    // Pass to next layer of middleware
-    next();
+    }else{
+	    // Pass to next layer of middleware
+	    next();
+	}
 });
 
 
