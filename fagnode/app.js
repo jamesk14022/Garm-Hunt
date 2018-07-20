@@ -128,7 +128,7 @@ app.get('/api/unapproved/outfits', function(req, res){
 app.get('/api/unapproved/reassign/:outfitId', function(req, res){
 	console.log('reassign triggered');
 	Outfit.update({ _id: req.params.outfitId }, {
-	  accepted: true
+	  'accepted': true
 	})
 	res.end();
 });
