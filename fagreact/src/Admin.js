@@ -8,13 +8,15 @@ constructor(props){
   this.state = { outfits:[] };
 
   this.getServerOutfits = this.getServerOutfits.bind(this);
+  this.outfitApprovalListener = this.outfitApprovalListener.bind(this);
 }
 
 getServerOutfits(){
 	Client.getUnapprovedOutfits()
-	.then(response => response.text())
+	.then(response => response.json())
   	.then(responseJson => {
-    console.log(responseJson);
+  	console.log(responseJson)
+    this.setState({ outfits: responseJson })
 })
 }
 
@@ -32,15 +34,20 @@ outfitApprovalListener(id, approved){
 }
 
 render() {
+	if(this.state.outfits.length > 0){
 	return (
 	<div className="Home">
 	<div className="container">
 	  <h2>Admin area</h2>
 	  <hr />
-	  <ReviewOutfits outfits={ this.state.outfits } approvalCallback={this.outfitApprovalListener.bind(this)} />
+
+	<ReviewOutfits outfits={ this.state.outfits } approvalCallback={this.outfitApprovalListener} />
 	</div>
 	</div>
 	);
+	}else{
+		return (<p>loading</p>);
+	}
 }
 }
 

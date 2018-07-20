@@ -5,7 +5,7 @@ function getUnapprovedOutfits(){
 // change the status of an outfit from unapproved to approved
 // using outfit id as selector
 function changeApprovalState(id){
-	return fetch(`/api/outfits/reassign/` + id);
+	return fetch(`/api/unapproved/reassign/` + id);
 }
 
 function getOutfitById(id){

@@ -5,7 +5,6 @@ class OutfitCard extends Component{
 	constructor(props){
 		super(props);
 		this.setImageFocus = this.setImageFocus.bind(this);
-
 		this.state = { focus: 0 };
 	}
 

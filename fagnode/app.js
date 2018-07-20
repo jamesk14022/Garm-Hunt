@@ -125,7 +125,7 @@ app.get('/api/unapproved/outfits', function(req, res){
 });
 
 //reassign an outfit from unapproved to approved
-app.get('/api/outfits/reassign/:outfitId', function(req, res){
+app.get('/api/unapproved/reassign/:outfitId', function(req, res){
 	Outfit.update({ _id: req.params.outfitId }, {
 	  accepted: true
 	})
