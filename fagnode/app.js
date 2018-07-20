@@ -90,7 +90,7 @@ app.get('/api/tags/outfits/:tag', function(req, res){
 
 //returns an array of outfits based on user
 app.get('/api/users/outfits/:user', function(req, res){
-	Outfit.find({ $and: [{ 'author': req.params.user }, { accepted: true }] }).lean().exec(function(err, outfit){
+	Outfit.find({ 'author.id': req.params.user }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
@@ -104,13 +104,6 @@ app.get('/api/users/:userid', function(req, res){
 	res.json(user);
 	});
 });
-
-
-app.get('/ap', function(req, res){
-	res.json({ test: 'test' });
-});
-
-
 
 //delivers a number of approved outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){

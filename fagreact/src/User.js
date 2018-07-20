@@ -15,23 +15,23 @@ class User extends Component{
 	}
 
 	getNameFromId(){
-		console.log(this.props.match.params.userid);
 		Client.getUserById(this.props.match.params.userid)
-			.then((response) => response.text())
+			.then((response) => response.json())
 			.then((body) => {
-				console.log(body)
+				this.setState({ fullname: body[0].full_name })
 			});
 	}
 
 	render(){
+		let { userid, fullname } = this.state;
 		return(
 		<div className="User">
 			<div className="container">
 				<div className="container">
-				<h2 style={{ 'marginTop': '80px'}}> {this.state.fullname} - submissions </h2>
+				<h2 style={{ 'marginTop': '80px'}}> {fullname} - submissions </h2>
 				<hr />
 				</div>
-				<ItemGrid user={this.state.userid} />
+				<ItemGrid user={userid} />
 			</div>
 		</div>
 		)
