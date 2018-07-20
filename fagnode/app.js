@@ -69,20 +69,6 @@ function convertImageData(outfits){
 	return outfits;
 }
 
-//returns full author name based on id
-function getFullFromId(id){
-	User.find({ facebook_id: id }).lean().exec(function(err, user){
-		if (err) return console.log(err);
-		if(user){
-			console.log('user');
-			return user;
-		}else{
-			console.log('null');
-			return null;
-		}
-	});
-}
-
 //get specific outfit based on Id
 //can access both approved and unapproved items this way, potential secuity issue?
 app.get('/api/outfits/:outfitId', function(req, res){
@@ -113,9 +99,10 @@ app.get('/api/users/outfits/:user', function(req, res){
 
 //returns user based on id
 app.get('/api/users/:userid', function(req, res){
-	let user = getFullFromId(req.params.userid);
-	console.log(user);
+	User.find({ facebook_id: req.params.userid }).lean().exec(function(err, user){
+	if (err) return console.log(err);
 	res.json(user);
+	});
 });
 
 
@@ -199,7 +186,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	}
 
 	var userOutfit = new Outfit();
-	userOutfit.author = { id: req.body.userID, fullName: getFullFromId(req.body.userID) };
+	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
 	userOutfit.date = Date.now();
 	userOutfit.images = images;
 	userOutfit.items = items;
