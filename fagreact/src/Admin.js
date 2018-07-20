@@ -26,7 +26,9 @@ componentDidMount(){
 
 outfitApprovalListener(id, approved){
 	if( approved ){
-		Client.changeApprovalState(id);
+		Client.changeApprovalState(id)
+		.then(response => response.text())
+		.then(body => console.log(body));
 	}else{
 		Client.deleteOutfit(id);
 	}

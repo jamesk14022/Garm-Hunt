@@ -126,9 +126,11 @@ app.get('/api/unapproved/outfits', function(req, res){
 
 //reassign an outfit from unapproved to approved
 app.get('/api/unapproved/reassign/:outfitId', function(req, res){
+	console.log('reassign triggered');
 	Outfit.update({ _id: req.params.outfitId }, {
 	  accepted: true
 	})
+	res.end();
 });
 
 //add a new user
