@@ -81,7 +81,7 @@ app.get('/api/outfits/:outfitId', function(req, res){
 
 //returns an array of outfits based on tag
 app.get('/api/tags/outfits/:tag', function(req, res){
-	Outfit.find({ 'tags.tag': req.params.tag }).lean().exec(function(err, outfit){
+	Outfit.find({ 'tags.tag': req.params.tag, accepted: true }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
