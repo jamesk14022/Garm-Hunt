@@ -123,7 +123,7 @@ app.get('/ap', function(req, res){
 //delivers a number of approved outfits, defaulting to 6
 app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
-	Outfit.find({ accepted: true }).limit(limit).lean().exec(function(err, outfit){
+	Outfit.find({}).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
 		res.json(convertImageData(outfit));
 	}
