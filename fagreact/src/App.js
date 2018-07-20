@@ -36,7 +36,6 @@ class App extends Component {
     }else{
       this.setState({ loggedIn: false, userID: null })
     }
-    console.log(this.state)
   }
 
   render(){

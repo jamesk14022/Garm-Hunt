@@ -18,6 +18,7 @@ populateGrid(tag, user){
   Client.getOutfitsByTag(tag)
   .then(response => response.json())
     .then((body) => {
+      console.log(body);
       var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
       this.setState({'outfits':  multiOutfits});
       let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
@@ -70,6 +71,8 @@ render() {
     next = <li onClick={() => this.setPage(currentPage + 1)}><a aria-label="Next"><span aria-hidden="true">Next</span></a></li>;
   }
 
+
+  if( outfitsToRender ){
   return (
   <div className="container-masonry">
     <Masonry
@@ -102,6 +105,9 @@ render() {
     </nav>
   </div>
   );
+}else{
+  return null;
+}
 }
 }
 

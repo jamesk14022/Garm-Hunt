@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
 import Client from './Client.js';
 import Dropzone from 'react-dropzone';
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -66,9 +65,10 @@ class Submit extends Component{
         outfit.tags = JSON.stringify(this.state.tags);
         outfit.items = JSON.stringify(outfit.items);
         outfit.userID = this.props.id;
+        outfit.images = this.state.images;
         this.setState({ errors: ''});
         Client.postOutfit(outfit);
-         this.props.history.push("/success");
+        this.props.history.push("/success");
       }else{
         this.setState({ errors: 'Please fill in all fields marked with an asterisk.'});
       }

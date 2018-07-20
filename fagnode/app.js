@@ -113,7 +113,7 @@ app.get('/api/users/outfits/:user', function(req, res){
 
 //returns user based on id
 app.get('/api/users/:userid', function(req, res){
-	res.json(getFullFromId(req.params.id));
+	res.json(getFullFromId(req.params.userid));
 });
 
 app.get('/ap', function(req, res){

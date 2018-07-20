@@ -80,5 +80,5 @@ function deleteOutfit(id){
 	});
 }
 
-const Client = { getOutfitById, getOutfitsByTag, getUserById, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit, getUnapprovedOutfits };
+const Client = { getOutfitById, changeApprovalState, getOutfitsByTag, getUserById, getOutfitsByUser, getRandomOutfits, postOutfit, postUser, deleteOutfit, getUnapprovedOutfits };
 export default Client

@@ -1,6 +1,5 @@
 import React from 'react';
 import ItemGrid from './ItemGrid.js'
-import FontAwesome from 'react-fontawesome';
 
 const Home = props => (
 	<div className="Home">

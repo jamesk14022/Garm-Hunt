@@ -15,13 +15,14 @@ class OutfitCard extends Component{
 	} 
 
 	render(){
-	let { author, model, items, images, tags, focus } = this.props;	
+	let { author, model, items, images, tags } = this.props;	
+	let { focus } = this.state;
 	return(
 
 		<div className="OutfitCard">
 		<div className="row">
 		<div className="col-md-6">
-			 <img alt="outfit" className="img-responsive" src={'data:' + images[this.state.focus].contentType + ';base64, ' + images[this.state.focus].base64} />
+			 <img alt="outfit" className="img-responsive" src={'data:' + images[focus].contentType + ';base64, ' + images[focus].base64} />
 		</div>
 
 		<div className="col-md-6">

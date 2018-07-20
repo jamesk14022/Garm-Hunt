@@ -13,7 +13,6 @@ constructor(props){
 }
 
 onFacebookLogin(loginStatus, resultObject){
-  console.log(resultObject)
   if (loginStatus === true) {
     this.setState({
       username: resultObject.name,
