@@ -1,5 +1,5 @@
 function getUnapprovedOutfits(){
-	return fetch(`/api/outfits/unapproved/`);
+	return fetch(`/api/unapproved/outfits/`);
 }
 
 // change the status of an outfit from unapproved to approved
