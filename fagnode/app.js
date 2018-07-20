@@ -117,10 +117,12 @@ app.get('/api/outfits', function(req, res){
 
 //delivers a number of unapproved outfits, defaulting to 6
 app.get('/api/outfits/unapproved', function(req, res){
-	if(err) return console.log(err);
-	res.send({ 'test': 'test'});
+	Outfit.find({ accepted: false }).limit(limit).lean().exec(function(err, outfit){
+		if (err) return console.log(err);
+		res.json(convertImageData(outfit));
+	}
+	);
 });
-
 
 //reassign an outfit from unapproved to approved
 app.get('/api/outfits/reassign/:outfitId', function(req, res){
