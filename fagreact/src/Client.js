@@ -1,10 +1,5 @@
-function getUnapprovedOutfits(limit){
-	let data = {
-		limit: limit
-	}
-	return fetch(`http://smallbrandserver.herokuapp.com/api/outfits/unapproved/`, {
-		body: data 
-	});
+function getUnapprovedOutfits(){
+	return fetch(`http://smallbrandserver.herokuapp.com/api/outfits/unapproved`);
 }
 
 // change the status of an outfit from unapproved to approved
