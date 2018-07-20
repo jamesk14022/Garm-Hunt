@@ -74,8 +74,10 @@ function getFullFromId(id){
 	User.find({ facebook_id: id }).lean().exec(function(err, user){
 		if (err) return console.log(err);
 		if(user){
+			console.log('user');
 			return user;
 		}else{
+			console.log('null');
 			return null;
 		}
 	});
