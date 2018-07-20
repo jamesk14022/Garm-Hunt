@@ -1,5 +1,5 @@
 function getUnapprovedOutfits(){
-	return fetch(`http://smallbrandserver.herokuapp.com/api/outfits/unapproved`);
+	return fetch(`/api/outfits/unapproved`);
 }
 
 // change the status of an outfit from unapproved to approved
