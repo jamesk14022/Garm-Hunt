@@ -12,7 +12,7 @@ constructor(props){
 
 getServerOutfits(){
 	Client.getUnapprovedOutfits()
-	.then(response => response.json())
+	.then(response => response.text())
   	.then(responseJson => {
     console.log(responseJson);
 })
