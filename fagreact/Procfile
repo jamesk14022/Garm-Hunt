@@ -1,1 +1,1 @@
-web: cd fagreact && npm start
+web: cd fagreact
