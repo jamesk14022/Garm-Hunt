@@ -64,9 +64,10 @@ function convertImageData(outfits){
 	Object.keys(outfits).forEach(function(key,index) {
 		for(let i = 0; i < outfits[key].images.length; i++){
 			outfits[key].images[i]['base64'] = outfits[key].images[i].data.toString('base64');
+			outfits[key].images.slice(0, 1);
 		}
 	});
-	return outfits.slice(0,1);
+	return outfits;
 }
 
 //get specific outfit based on Id
