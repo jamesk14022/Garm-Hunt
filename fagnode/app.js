@@ -60,13 +60,9 @@ var Outfit = mongoose.model('Outfit', outfitSchema);
 var User = mongoose.model('User', userSchema);
 
 //takes array of image data and makes it parseable by browser
+//returns only 1 image for each outfit as that is all is needed for itemgrid preview
 function convertImageData(outfits){
-	Object.keys(outfits).forEach(function(key,index) {
-		for(let i = 0; i < outfits[key].images.length; i++){
-			outfits[key].images[i]['base64'] = outfits[key].images[i].data.toString('base64');
-			outfits[key].images.slice(0, 1);
-		}
-	});
+
 	return outfits;
 }
 
