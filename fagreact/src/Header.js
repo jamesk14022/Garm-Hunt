@@ -35,7 +35,7 @@ let { username, userid } = this.state;
 return (
 <div className="Header">
   <Helmet>
-    <title>Correct_Couture</title>
+    <title>GarmHunt</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   </Helmet>
   <nav className="navbar navbar-default navbar-fixed-top">
@@ -47,7 +47,7 @@ return (
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>
       </button>
-      <Link className="navbar-brand" to={`/`}>Correct_Couture <sub>(Beta)</sub></Link>
+      <Link className="navbar-brand" to={`/`}>GarmHunt <sub>(Beta)</sub></Link>
     </div>
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav navbar-right">

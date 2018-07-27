@@ -13,7 +13,7 @@ const ReviewOutfitCard = ({ outfit, approvalCallback }) => (
 			<li>{outfit.author.id} is the uploader</li>
 		</ul>
 
-		<Link to={ 'outfit' + outfit._id }>View full outfit</Link>
+		<Link to={ 'outfit/' + outfit._id }>View full outfit</Link>
 
 		<div className="btn-group" role="group" aria-label="...">
 			<button type="button" onClick={ () => approvalCallback( outfit._id, false ) } className="btn btn-danger">Reject</button>

@@ -4,12 +4,46 @@
     }
 }
 
+div.Home div.container-fluid{
+	margin: 0px 40px;
+}
+
 div.row{
 	margin: 0px;
 }
 
+
+div.learn{
+	margin-top: 50px;
+}
+
+div.learn a{
+	font-size: 23px;
+}
+
+div.learn a:link{
+	text-decoration: underline solid #337ab7;
+}
+
+div.learn a:active{
+	text-decoration: underline solid #337ab7;
+}
+
+div.learn a:visited{
+	text-decoration: underline solid #337ab7;
+}
+
+div.feature-row{
+	margin-top: 80px;
+	margin-bottom: 40px;
+}
+
 div.search-bar{
 	padding: 0px 15px;
+}
+
+h2.grid-heading{
+	margin-bottom: 0px;
 }
 
 div.Home div.container{
@@ -106,10 +140,9 @@ p{
 }
 
 div.explain{
-	background-color: #dbdbdb;
-	height: 400px;
+	height: 410px;
 	padding: 30px;
-	margin-top: 20px;
+	background-color: #eee
 }
 
 div.explain ul{
@@ -138,11 +171,11 @@ div.explain h3.share:before {
 .feature{
 	z-index: -1;
 	background-size: cover;
-	height: 400px;
-	margin-top: 20px;
-	padding: 30px;
+	height: 410px;
+	margin: 0px;
+	padding: 0px 40px;
 	position: relative;
-	background-image: url('/feature.jpg');
+	background-image: url('/f2.jpg');
 	background-color: #dbdbdb;
 }
 
@@ -157,7 +190,7 @@ div.explain h3.share:before {
     background: rgba(0, 0, 0, 0.7);
 } 
 
- h2 span.spacer{
+h2 span.spacer{
 	padding: 0 5px;
 }
 
@@ -174,7 +207,7 @@ div.row-eq-height div.col-md-10{
 	padding: 0px;
 }
 
-div.col-md-2{
+div.col-md-2, div.col-md-4, div.col-md-8, div.col-sm-12{
 	padding: 0px;
 }
 
@@ -182,6 +215,7 @@ div.col-md-10 hr{
 	margin-right: 65px;
 }
 
-hr{
+div.Home hr{
 	height: 2px;
+	margin-top: 10px; 
 }

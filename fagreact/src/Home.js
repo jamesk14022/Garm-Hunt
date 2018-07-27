@@ -1,20 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ItemGrid from './ItemGrid.js'
 
 const Home = props => (
 	<div className="Home">
-	  <div className="container">
-	  <div className="row">
-	  	<div className="col-sm-12 col-md-8"><div className="feature"><h3>L.A Skate Inspired<span className="spacer"></span></h3></div></div>
+	  <div className="container-fluid">
+	  <div className="row feature-row">
+	  	<Link to='/corporatebootleg'><div className="col-sm-12 col-md-8"><div className="feature"><h3>Corporate Bootleg<span className="spacer"></span></h3></div></div></Link>
 	  	<div className="hidden-xs hidden-sm col-md-4"><div className="explain"><ul>
-	  		<li><h3 className="discover">Discover</h3><p>Find outfits from trending small brands and designers</p></li>
-	  		<li><h3 className="share">Share</h3><p>Post a personal outfit and inspire others</p></li>
-	  		<li><h3 className="promote">Promote</h3><p>Spread word of your social media page or small brand</p></li>
+	  		<li><h3 className="discover">Discover</h3><p>Find clothes from new small brands and designers that you can't find anywhere else.</p></li>
+	  		<li><h3 className="share">Share</h3><p>Post a personal outfit and inspire our audience.</p></li>
+	  		<li><h3 className="promote">Promote</h3><p>Spread word of your small brand or social media account. Get discovered!</p></li>
+	  		<div className="learn"><Link to='about'>Learn More</Link></div>
 	  	</ul></div></div>
 	  </div>
 	  <div className="row">
 	  <div className="col-sm-12 col-md-12">
-		  <h2>Trending Now</h2>
+		  <h2 className="grid-heading">Trending Now</h2>
 		  <hr />
 	  </div>
 	  </div>
@@ -23,8 +25,8 @@ const Home = props => (
 	  	<div className="hidden-xs hidden-sm hidden-md col-lg-3 tall">
 	  	<div id="email-funnel">
 	  		<form>
-	  		<h4>Correct_Couture</h4>
-	  		<p>Signup to get the latest from Small Brands, we won't spam you!</p>
+	  		<h4>GarmHunt</h4>
+	  		<p>Signup to get the latest from GarmHunt, we won't spam you!</p>
 	  		<div className="form-group">
 		  		<input type="email" className="form-control" placeholder="Email Address" />
 		  		<button type="button" className="btn btn-primary">Submit</button>

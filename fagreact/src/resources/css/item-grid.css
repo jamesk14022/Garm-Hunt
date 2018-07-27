@@ -1,5 +1,6 @@
 div.masonry{
 	margin: 0;
+	padding: 0px;
 }
 
 div.container-masonry{
@@ -15,22 +16,57 @@ nav#pagination ul{
 }
 
 img.img-item{
-	width: 330px;
+	top: 0px;
+	left: 0px;
+	width: 280px;
 	height: auto;
-	padding: 2px 15px;
+	padding: 20px 30px;
 	padding-left: 0px;
 	margin-top: 5px;
+	margin-right: 0px;
 }
 
-.glyphicon-heart{
-	font-size: 20px;
+div.editor-item .glyphicon-heart{
+	font-size: 25px;
 	display: none; 
+	position: absolute;
+	top: 35px;
+	left: 10px;
 }
 
-.fash-item:hover .glyphicon-heart{
+div.editor-item:hover .glyphicon-heart{
 	display: block;
+	text-decoration: none;
 }
 
 .glyphicon-heart:hover{
 	color: red;
+}
+
+div.img-tags{
+	position: absolute;
+	top: 35px;
+	right: 40px;
+	display: none;
+}
+
+div.editor-item:hover div.img-tags{
+	display: block;
+}
+
+div.img-tags ul{
+	list-style: none;
+}
+
+div.img-tags li{
+	display: inline;
+	margin-left: 5px;
+	background-color: #eee;
+	font-size: 14px;
+	padding: 4px;
+	border-radius: 3px;
+}
+
+div.img-tags a:hover{
+	text-decoration: none;
 }

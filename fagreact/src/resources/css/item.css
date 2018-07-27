@@ -31,7 +31,7 @@
 }
 
 #item-misc{
-	position: relative;
+	padding-left: 30px;
 	border-bottom: 2px solid grey;
 	height: 250px;
 }
@@ -41,20 +41,6 @@
 	bottom: 5px;
 	left: 5px;
 }
-
-#social{
-	position: absolute;
-	bottom: 0px;
-	right: 5px;
-}
-
-.social-buttons{
-	
-	display: inline;
-	font-size: 32px;
-	margin-left: 20px;
-}
-
 
 h1{
 
@@ -90,3 +76,4 @@ h1{
 	margin-top: 60px;
 	
 }
+

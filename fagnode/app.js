@@ -66,7 +66,7 @@ function convertImageData(outfits){
 			outfits[key].images[i]['base64'] = outfits[key].images[i].data.toString('base64');
 		}
 	});
-	return outfits;
+	return outfits.slice(0,1);
 }
 
 //get specific outfit based on Id

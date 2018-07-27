@@ -3,12 +3,16 @@ div.About{
 	margin-bottom: 160px;
 }
 
+div.About h2{
+	text-decoration: underline solid #337ab7;
+}
+
 div.About p{
 	font-size: 20px;
 }
 
 div.about-photos{
-	margin-top: 75px;
+	margin-top: 25px;
 	padding-left: 25px;
 }
 

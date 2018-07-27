@@ -4,18 +4,18 @@ import ItemGrid from './ItemGrid';
 class Tag extends Component{
 	constructor(props){
 		super(props);
-		this.tag = this.props.match.params.tag;
 	}
 
 	render(){
+	let { tag } = this.props.match.params;
 		return(
 			<div className="Tag">
 			<div className="container">
 				<div className="container">
-				<h2 style={{ 'marginTop': '80px'}}>Tagged { this.tag }</h2>
+				<h2 style={{ 'marginTop': '80px'}}>Tagged { tag }</h2>
 				<hr />
 				</div>
-				<ItemGrid tag={ this.tag } />
+				<ItemGrid tag={ tag } />
 			</div>
 			</div>
 		);

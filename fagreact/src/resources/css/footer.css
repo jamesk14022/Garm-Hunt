@@ -1,6 +1,11 @@
 div.Footer li.list-inline-item{
 	margin-right: 30px;
 	font-weight: 500;
+	text-decoration: underline solid #337ab7;
+}
+
+div.Footer a:active, div.Footer a:link, div.Footer a:visited{
+	text-decoration: underline solid #337ab7;
 }
 
 div.container-feature{

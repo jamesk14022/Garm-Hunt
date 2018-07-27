@@ -5,31 +5,28 @@ import Client from './Client';
 class CorporateBootleg extends Component{
 	constructor(props){
 		super(props);
-		this.getDiscriptions = this.getDiscriptions.bind(this);
-		this.state = { items: [], desciptions: this.getDiscriptions() }
+		this.getFeature = this.getFeature.bind(this);
+		this.state = { items: [], descriptions: []}
 	}
 
 	componentDidMount(){
 	  Client.getOutfitsByTag('cpboot')
 	  .then(response => response.json())
 	    .then((body) => { 
-	      this.setState({ 'outfits':  body });
+	      this.setState({ items:  body });
 	  })
 	}
 
-	getDiscriptions(){
-		return([
-			'lorem ipsum',
-			'lorem ipsum',
-			'lorem ipsum',
-			'lorem ipsum'
-		]);
+	getFeature(){
+		if(this.state.items.length > 0){
+			return <Feature title='Corporate Bootleg' items={ this.state.items } descriptions={ this.state.descriptions } />;
+		}else{
+			return null;
+		}
 	}
 
 	render(){
-		return(
-			<Feature title='Corporate Bootleg' items={ this.state.items } desciptions={ this.state.desciptions } />
-		);
+		return(this.getFeature());
 	}
 }
 

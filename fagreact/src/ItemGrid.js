@@ -18,32 +18,33 @@ populateGrid(tag, user){
   Client.getOutfitsByTag(tag)
   .then(response => response.json())
     .then((body) => {
-      console.log(body);
-      var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
-      this.setState({'outfits':  multiOutfits});
-      let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+      this.setState({'outfits':  body});
+      let pages = Math.ceil(body.length / this.state.pagination.itemsPerPage);
       this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
   })
   }else if(user){
     Client.getOutfitsByUser(user)
       .then(response => response.json())
         .then((body) => {
-          var multiOutfits = this.state.outfits.concat(body).concat(body).concat(body).concat(body);
-          this.setState({'outfits':  multiOutfits});
-          let pages = Math.ceil(multiOutfits.length / this.state.pagination.itemsPerPage);
+          this.setState({'outfits':  body});
+          let pages = Math.ceil(body.length / this.state.pagination.itemsPerPage);
           this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
       })
   }
 }
 
 componentDidMount(){
-  this.setState({ loading: true });
-  this.populateGrid(this.props.tag, this.props.user);
+  if(this.props.tag || this.props.user){
+    this.setState({ loading: true, outfits: [] });
+    this.populateGrid(this.props.tag, this.props.user);
+  }
 }
 
-componentWillReceiveProps(nextProps){
-  this.setState({ loading: true });
-  this.populateGrid(nextProps.tag, nextProps.user);
+componentDidUpdate(prevProps){
+  if(prevProps.tag !== this.props.tag || prevProps.user !== this.props.user){
+    this.setState({ loading: true, outfits: [] });
+    this.populateGrid(this.props.tag, this.props.user);
+  }
 }
 
 
@@ -87,6 +88,15 @@ render() {
         <div className="editor-item">
           <img alt="outfit" className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
           <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
+          {(item.tags.length > 0) ? 
+          <div className="img-tags"><ul>
+            {item.tags.slice(0, 2).map((tag, index) => (
+              <li key={index}>{tag.tag}</li>
+            ))}
+          </ul></div>
+          :
+          null
+          }
         </div>
       </Link>
       </div>

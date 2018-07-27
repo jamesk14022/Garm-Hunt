@@ -5,6 +5,7 @@ import ItemGrid from './ItemGrid';
 import OutfitCard from './OutfitCard';
 
 class Outfit extends Component{
+
 	constructor(props){
 		super(props);
 		//focus denotes array pos of image to be enlarged
@@ -33,8 +34,10 @@ class Outfit extends Component{
 
 		return(
 		<div className="Outfit">
-			<div className="container main-content">
+			<div key={ this.props.match.params.id } className="container-fluid main-content">
 				<OutfitCard { ...this.state.outfit } />
+			</div>
+			<div className="container-fluid">
 				<div className="suggested-items">
 					<div className="row">
 					<div className="col-md-12">
@@ -47,6 +50,8 @@ class Outfit extends Component{
 							<ItemGrid tag={ this.state.outfit.tags[0].tag }/>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</div>

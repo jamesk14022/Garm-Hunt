@@ -10,7 +10,9 @@ import Admin from './Admin';
 import Tag from './Tag';
 import User from './User';
 import About from './About';
+import CorporateBootleg from './CorporateBootleg';
 import PageNotFound from './PageNotFound';
+import NotLoggedIn from './NotLoggedIn';
 
 //hoc reserved for loggedin users
 //auth loguic needs brishing up here - insec
@@ -18,7 +20,7 @@ const PrivateRoute = ({ component: Component, logged: loggedIn, id: Id, ...rest 
   <Route {...rest} render={(props) => (
     loggedIn === true
     ? <Component id={Id} {...props} />
-    : <p style={{'marginTop' : '100px'}}>you needa be loggin in , b</p>
+    : <NotLoggedIn />
   )}/>
 )
 
@@ -48,6 +50,7 @@ class App extends Component {
       <Route path='/tag/:tag' component={Tag}/>
       <Route path='/user/:userid' component={User}/>
       <Route path='/about' component={About}/>
+      <Route path='/corporatebootleg' component={CorporateBootleg} />
       <PrivateRoute path='/success' component={SubmitSuccess} logged={this.state.loggedIn}/>
       <PrivateRoute path='/submit' component={Submit} logged={this.state.loggedIn} id={this.state.userID}/>
       <PrivateRoute path='/admin' component={Admin} logged={this.state.loggedIn}/>
