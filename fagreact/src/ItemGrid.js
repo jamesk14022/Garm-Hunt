@@ -18,6 +18,7 @@ populateGrid(tag, user){
   Client.getOutfitsByTag(tag)
   .then(response => response.json())
     .then((body) => {
+      console.log(body);
       this.setState({'outfits':  body});
       let pages = Math.ceil(body.length / this.state.pagination.itemsPerPage);
       this.setState({ loading: false, pagination: {...this.state.pagination, pages: pages}});
