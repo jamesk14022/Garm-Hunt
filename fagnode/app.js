@@ -37,7 +37,7 @@ var storage = multer.diskStorage({
 	    });
     },
     filename: (req, file, callback) => {
-    	callback(null, file.fieldname + '.png')
+    	callback(null, 'test' + '.png')
     }
 });
 
