@@ -32,9 +32,8 @@ app.use(function (req, res, next) {
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, callback) => {
-    	console.log(req.ui);
-	    fs.mkdir(path.join(__dirname, 'images', req.ui), function(){
-	       callback(null, path.join(__dirname, 'images', req.ui));
+	    fs.mkdir(path.join(__dirname, 'images', req.body.userID), function(){
+	       callback(null, path.join(__dirname, 'images', req.body.userID));
 	    });
     },
     filename: (req, file, callback) => {
@@ -173,7 +172,7 @@ app.post('/api/user', function(req, res){
 
 //post a new outfit to the app
 app.post('/api/outfit', upload.any(), function(req, res){
-	req.ui = shortid.generate;
+	req.ui = shortid();
 
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
