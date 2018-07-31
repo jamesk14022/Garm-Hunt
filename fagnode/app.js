@@ -199,7 +199,10 @@ app.post('/api/outfit', upload.any(), function(req, res){
 
 	userOutfit.save(function(err, fluffy){
 		if (err) console.log(err);
+		res.end();
 	});
+
+	res.end();
 });
 
 //delete an outfit from the app based on id
