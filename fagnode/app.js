@@ -31,13 +31,13 @@ app.use(function (req, res, next) {
 
 var multer = require('multer');
 var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-    	let dir = path.join(__dirname, 'images', req.ui);
-    	mkdirp(dir, err => cb(err, dir));
-		cb(null, dir);
+    destination: (req, file, callback) => {
+	    fs.mkdir(path.join(__dirname, 'images', req.ui), function(){
+	       callback(null, path.join(__dirname, 'images', req.ui));
+	    });
     },
-    filename: (req, file, cb) => {
-    	cb(null, file.fieldname + '.png')
+    filename: (req, file, callback) => {
+    	callback(null, file.fieldname + '.png')
     }
 });
 
