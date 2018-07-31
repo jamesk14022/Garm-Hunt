@@ -173,7 +173,6 @@ app.post('/api/user', function(req, res){
 //post a new outfit to the app
 app.post('/api/outfit', function(req, res){
 	req.ui = shortid();
-
 	upload(req, res, function (err) {
     if (err) {
       console.log("Something went wrong!");
@@ -185,6 +184,9 @@ app.post('/api/outfit', function(req, res){
 	//subimt outfit to monogodb
 
 	//decode json string of items(json'd bc it has to be transferred as multipart)
+
+	console.log(req.body);
+
 	try{
 		var items = JSON.parse(req.body.items);
 		var rawTags = JSON.parse(req.body.tags);
