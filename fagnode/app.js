@@ -188,7 +188,7 @@ app.post('/api/outfit', function(req, res){
 	upload(req, res, function (err) {
     if (err) {
     	console.log(err);
-      console.log("Something went wrong!");
+      	console.log("Something went wrong!");
     }
 
 	try{
@@ -202,6 +202,8 @@ app.post('/api/outfit', function(req, res){
 	for(let i = 0; i < rawTags.length; i++){
 		tags.push({ tag: rawTags[i].text });
 	}
+
+	console.log(req.files);
 
 	var userOutfit = new Outfit();
 	userOutfit._id = req.ui;
