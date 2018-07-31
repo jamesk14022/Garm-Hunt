@@ -43,7 +43,9 @@ cloudinary.config({
 
 var Storage = cloudinaryStorage({
   cloudinary: cloudinary,
-  folder: 'imgs',
+  folder: function (req, file, cb) {
+    cb(undefined, 'outfit-images/' + req.ui);
+  },
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
     cb(undefined, 'my-file-name');
