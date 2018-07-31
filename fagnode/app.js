@@ -32,6 +32,7 @@ app.use(function (req, res, next) {
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, callback) => {
+    	console.log(req);
 	    fs.mkdir(path.join(__dirname, 'images', req.ui), function(){
 	       callback(null, path.join(__dirname, 'images', req.ui));
 	    });
