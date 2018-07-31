@@ -31,7 +31,8 @@ app.use(function (req, res, next) {
 
 var multer = require('multer');
 var Storage = multer.diskStorage({
-  destination: '/images'
+  destination: function (req, file, callback) {
+    callback(null, '/images');
   },
   filename: function (req, file, callback) {
     callback(null, req.ui + 'test.png');
