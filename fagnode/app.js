@@ -179,9 +179,6 @@ app.post('/api/outfit', function(req, res){
       console.log("Something went wrong!");
     }
 
-
-	console.log(req.body);
-
 	try{
 		var items = JSON.parse(req.body.items);
 		var rawTags = JSON.parse(req.body.tags);
