@@ -190,7 +190,6 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	}
 
 	var userOutfit = new Outfit();
-	userOutfit._id = req.ui;
 	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
 	userOutfit.date = Date.now();
 	userOutfit.items = items;
