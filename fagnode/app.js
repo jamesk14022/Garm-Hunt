@@ -41,7 +41,7 @@ var Storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage }).any();
+var upload = multer({ storage: Storage }).any();
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_r09ljrwl:tjtjogjpuaa8sfiemk7a8rdop5@ds141221.mlab.com:41221/heroku_r09ljrwl');
