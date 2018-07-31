@@ -32,10 +32,12 @@ app.use(function (req, res, next) {
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, '/images')
+    	let dir = path.join(__dirname, 'images', req.ui);
+    	mkdirp(dir, err => cb(err, dir));
+		cb(null, dir);
     },
     filename: (req, file, cb) => {
-      cb(null, file.fieldname + '.png')
+    	cb(null, file.fieldname + '.png')
     }
 });
 
@@ -170,6 +172,8 @@ app.post('/api/user', function(req, res){
 
 //post a new outfit to the app
 app.post('/api/outfit', upload.any(), function(req, res){
+	req.ui = shortid();
+
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
 
@@ -180,11 +184,6 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	} catch(err) {
 		if(err) console.log(err);
 	}
-	
-	var images = [];
-	req.files.forEach(function(item){
-		images.push({ data: fs.readFileSync(item.path), contentType: item.mimetype });
-	});
 
 	var tags = [];
 	for(let i = 0; i < rawTags.length; i++){
@@ -192,9 +191,9 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	}
 
 	var userOutfit = new Outfit();
+	userOutfit._id = req.ui;
 	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
 	userOutfit.date = Date.now();
-	userOutfit.images = images;
 	userOutfit.items = items;
 	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
 	userOutfit.tags = tags;
