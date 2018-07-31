@@ -30,18 +30,18 @@ app.use(function (req, res, next) {
 });
 
 var multer = require('multer');
-var storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-	    fs.mkdir(path.join('images', req.body.userID), function(){
-	       callback(null, path.join('images', req.body.userID));
-	    });
-    },
-    filename: (req, file, callback) => {
-    	callback(null, 'test' + '.png')
-    }
+var Storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    fs.mkdir(path.join(__dirname, 'images', req.ui), function(){
+       callback(null, path.join(__dirname, 'images', req.ui));
+    });
+  },
+  filename: function (req, file, callback) {
+    callback(null, req.ui + 'test.png'));
+  }
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage }).any();
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_r09ljrwl:tjtjogjpuaa8sfiemk7a8rdop5@ds141221.mlab.com:41221/heroku_r09ljrwl');
@@ -171,7 +171,15 @@ app.post('/api/user', function(req, res){
 });
 
 //post a new outfit to the app
-app.post('/api/outfit', upload.any(), function(req, res){
+app.post('/api/outfit', function(req, res){
+	req.ui = shortid();
+
+	upload(req, res, function (err) {
+    if (err) {
+      return res.end("Something went wrong!");
+    }
+	   return res.end("File uploaded sucessfully!.");
+	});
 
 	//validate the outfit input to make sur eits valid
 	//subimt outfit to monogodb
@@ -190,6 +198,7 @@ app.post('/api/outfit', upload.any(), function(req, res){
 	}
 
 	var userOutfit = new Outfit();
+	userOutfit._id = req.ui;
 	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
 	userOutfit.date = Date.now();
 	userOutfit.items = items;
