@@ -1,3 +1,6 @@
+var cloudinary = require('cloudinary');
+var cloudinaryStorage = require('multer-storage-cloudinary');
+
 var express = require('express');
 var app = express();
 var mkdirp = require('mkdirp');
@@ -31,13 +34,19 @@ app.use(function (req, res, next) {
 });
 
 var multer = require('multer');
-var Storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-  	mkdirp.sync('/images');
-    callback(null, '/images');
-  },
-  filename: function (req, file, callback) {
-    callback(null, req.ui + 'test.png');
+
+cloudinary.config({ 
+  cloud_name: 'hccxvb0bt', 
+  api_key: '236422623937785', 
+  api_secret: 'myekpk7JTUvTL6En8vKm_eyGAho' 
+});
+
+var Storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'imgs',
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
+    cb(undefined, 'my-file-name');
   }
 });
 
