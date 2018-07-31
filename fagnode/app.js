@@ -29,6 +29,7 @@ app.use(function (req, res, next) {
 	}
 });
 
+var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, '/images')
@@ -38,7 +39,6 @@ var storage = multer.diskStorage({
     }
 });
 
-var multer = require('multer');
 var upload = multer({ storage: storage });
 
 var mongoose = require('mongoose');
