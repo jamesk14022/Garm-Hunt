@@ -29,9 +29,17 @@ app.use(function (req, res, next) {
 	}
 });
 
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, '/images')
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '.png')
+    }
+});
 
 var multer = require('multer');
-var upload = multer({ dest: 'upload/'});
+var upload = multer({ storage: storage });
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_r09ljrwl:tjtjogjpuaa8sfiemk7a8rdop5@ds141221.mlab.com:41221/heroku_r09ljrwl');
@@ -204,6 +212,8 @@ app.delete('/api/outfits/:outfitId', function(req, res){
 		if (err) console.log(err);
 	});
 });
+
+app.use(express.static(__dirname + '/images'));
 
 app.listen(process.env.PORT || 8080, function(){
 	console.log('API listening for connnections. t');
