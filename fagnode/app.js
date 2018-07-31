@@ -203,10 +203,16 @@ app.post('/api/outfit', function(req, res){
 		tags.push({ tag: rawTags[i].text });
 	}
 
+	var images = [];
+	for(let i = 0; i<req.files.length; i++){
+		images.push({ public_id: req.files[i].public_id, url: req.files[i].url });
+	}
+
 	console.log(req.files);
 
 	var userOutfit = new Outfit();
 	userOutfit._id = req.ui;
+	userOutfit.images = images;
 	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
 	userOutfit.date = Date.now();
 	userOutfit.items = items;
