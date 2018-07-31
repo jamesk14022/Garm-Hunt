@@ -66,7 +66,7 @@ const outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
 	author: { id: String, fullName: String },
 	date: Date,
-	images: [{ public_id: String url: String }],
+	images: [{ public_id: String, url: String }],
 	items: [{ name: String, url: String }],
 	tags: [{ tag: String }],
 	features: [{ tag: String}],
