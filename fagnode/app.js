@@ -179,7 +179,7 @@ app.post('/api/outfit', function(req, res){
       console.log("Something went wrong!");
     }
 
-    
+
 	console.log(req.body);
 
 	try{
@@ -227,7 +227,7 @@ app.delete('/api/outfits/:outfitId', function(req, res){
 	});
 });
 
-app.use(express.static(__dirname + '/images'));
+app.use('/', express.static(__dirname + '/images'));
 
 app.listen(process.env.PORT || 8080, function(){
 	console.log('API listening for connnections. t');
