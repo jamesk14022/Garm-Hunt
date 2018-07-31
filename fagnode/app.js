@@ -205,6 +205,7 @@ app.post('/api/outfit', function(req, res){
 
 	var images = [];
 	for(let i = 0; i<req.files.length; i++){
+		console.log(i);
 		images.push({ public_id: req.files[i].public_id, url: req.files[i].url });
 	}
 
