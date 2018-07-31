@@ -83,24 +83,13 @@ const userSchema = new mongoose.Schema({
 var Outfit = mongoose.model('Outfit', outfitSchema);
 var User = mongoose.model('User', userSchema);
 
-//takes array of image data and makes it parseable by browser
-//returns only 1 image for each outfit as that is all is needed for itemgrid preview
-function convertImageData(outfits){
-	Object.keys(outfits).forEach(function(key,index) {
-		for(let i = 0; i < outfits[key].images.length; i++){
-			outfits[key].images[i]['base64'] = outfits[key].images[i].data.toString('base64');
-		}
-		outfits[key].images.slice(0, 1);
-	});
-	return outfits;
-}
 
 //get specific outfit based on Id
 //can access both approved and unapproved items this way, potential secuity issue?
 app.get('/api/outfits/:outfitId', function(req, res){
 	Outfit.find({ _id: req.params.outfitId }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		res.json(convertImageData(outfit)[0]);
+		res.json(outfit[0]);
 	}
 	);
 });
@@ -109,7 +98,7 @@ app.get('/api/outfits/:outfitId', function(req, res){
 app.get('/api/tags/outfits/:tag', function(req, res){
 	Outfit.find({ 'tags.tag': req.params.tag, accepted: true }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		res.json(convertImageData(outfit));
+		res.json(outfit);
 	}
 	);
 });
@@ -118,7 +107,7 @@ app.get('/api/tags/outfits/:tag', function(req, res){
 app.get('/api/users/outfits/:user', function(req, res){
 	Outfit.find({ 'author.id': req.params.user }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		res.json(convertImageData(outfit));
+		res.json(outfit);
 	}
 	);
 });
@@ -136,7 +125,7 @@ app.get('/api/outfits', function(req, res){
 	let limit = parseInt(req.body.limit) || 6;
 	Outfit.find({ accepted: true }).limit(limit).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		res.json(convertImageData(outfit));
+		res.json(outfit);
 	}
 	);
 });
@@ -145,7 +134,7 @@ app.get('/api/outfits', function(req, res){
 app.get('/api/unapproved/outfits', function(req, res){
 	Outfit.find({ accepted: false }).lean().exec(function(err, outfit){
 		if (err) return console.log(err);
-		res.json(convertImageData(outfit));
+		res.json(outfit);
 	}
 	);
 });
