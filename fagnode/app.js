@@ -174,6 +174,7 @@ app.post('/api/outfit', function(req, res){
 
 	upload(req, res, function (err) {
     if (err) {
+    	console.log(err);
       console.log("Something went wrong!");
     }
 
