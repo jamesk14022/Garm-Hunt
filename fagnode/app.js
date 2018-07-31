@@ -208,7 +208,7 @@ app.post('/api/outfit', function(req, res){
 		images.push({ public_id: req.files[i].public_id, url: req.files[i].url });
 	}
 
-	console.log(req.files[i].public_id);
+	console.log(req.files[0].public_id);
 
 	var userOutfit = new Outfit();
 	userOutfit._id = req.ui;
