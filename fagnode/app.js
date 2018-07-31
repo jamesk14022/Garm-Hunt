@@ -66,7 +66,7 @@ const outfitSchema = new mongoose.Schema({
 	_id: { type: String, 'default': shortid.generate },
 	author: { id: String, fullName: String },
 	date: Date,
-	images: [{ data: Buffer, contentType: String }],
+	images: [{ public_id: String url: String }],
 	items: [{ name: String, url: String }],
 	tags: [{ tag: String }],
 	features: [{ tag: String}],
@@ -205,11 +205,8 @@ app.post('/api/outfit', function(req, res){
 
 	var images = [];
 	for(let i = 0; i<req.files.length; i++){
-		console.log(i);
 		images.push({ public_id: req.files[i].public_id, url: req.files[i].url });
 	}
-
-	console.log(req.files[0].public_id);
 
 	var userOutfit = new Outfit();
 	userOutfit._id = req.ui;
