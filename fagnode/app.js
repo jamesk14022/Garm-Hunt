@@ -48,7 +48,7 @@ var Storage = cloudinaryStorage({
   },
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
-    cb(undefined, 'my-file-name');
+    cb(undefined, file.fieldname + '-' + Date.now());
   }
 });
 
