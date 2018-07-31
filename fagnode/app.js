@@ -173,18 +173,13 @@ app.post('/api/user', function(req, res){
 //post a new outfit to the app
 app.post('/api/outfit', function(req, res){
 	req.ui = shortid();
+
 	upload(req, res, function (err) {
     if (err) {
       console.log("Something went wrong!");
     }
-	   console.log("File uploaded sucessfully!.");
-	});
 
-	//validate the outfit input to make sur eits valid
-	//subimt outfit to monogodb
-
-	//decode json string of items(json'd bc it has to be transferred as multipart)
-
+    
 	console.log(req.body);
 
 	try{
@@ -214,6 +209,14 @@ app.post('/api/outfit', function(req, res){
 	});
 
 	res.end();
+	
+	console.log("File uploaded sucessfully!.");
+	});
+
+	//validate the outfit input to make sur eits valid
+	//subimt outfit to monogodb
+
+	//decode json string of items(json'd bc it has to be transferred as multipart)
 });
 
 //delete an outfit from the app based on id
