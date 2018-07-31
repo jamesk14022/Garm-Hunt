@@ -176,9 +176,9 @@ app.post('/api/outfit', function(req, res){
 
 	upload(req, res, function (err) {
     if (err) {
-      return res.end("Something went wrong!");
+      console.log("Something went wrong!");
     }
-	   return res.end("File uploaded sucessfully!.");
+	   console.log("File uploaded sucessfully!.");
 	});
 
 	//validate the outfit input to make sur eits valid
