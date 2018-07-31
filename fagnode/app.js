@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var mkdirp = require('mkdirp');
 
 var compression = require('compression');
 app.use(compression());
@@ -32,6 +33,7 @@ app.use(function (req, res, next) {
 var multer = require('multer');
 var Storage = multer.diskStorage({
   destination: function (req, file, callback) {
+  	mkdirp.sync('/images');
     callback(null, '/images');
   },
   filename: function (req, file, callback) {
