@@ -9,7 +9,7 @@ class Outfit extends Component{
 	constructor(props){
 		super(props);
 		//focus denotes array pos of image to be enlarged
-		this.state = { outfit: {author: { id: '', fullName: '' }, model: { url: ''}, items: [], images: [{ contentType : '', base64: ''}], tags: [ { tag : ''}] } };
+		this.state = { outfit: {author: { id: '', fullName: '' }, model: { url: ''}, items: [], images: [], tags: [ { tag : ''}] } };
 	}
 
 	updateOutfit(id){

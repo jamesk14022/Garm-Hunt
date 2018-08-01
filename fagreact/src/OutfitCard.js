@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import {Image, CloudinaryContext} from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 import PersonBox from './PersonBox.js';
 
 class OutfitCard extends Component{
 
-	state = { focus: 0 }
-
 	constructor(props){
 		super(props);
 		this.setImageFocus = this.setImageFocus.bind(this);
+
+		this.state = { focus: 0 }
 	}
 
 	//sets image to be englarged
@@ -35,7 +36,9 @@ class OutfitCard extends Component{
 		<div className="OutfitCard">
 		<div className="row">
 		<div className="col-md-6 left">
-			{(images) ? <img alt="outfit" className="img-responsive" src={'data:' + images[focus].contentType + ';base64, ' + images[focus].base64} /> : ''}
+			<CloudinaryContext cloudName="hccxvb0bt">
+			{(images[focus]) ? <Image alt="outfit"  publicId={images[focus].public_id}  className="img-responsive"  /> : ''}
+			</CloudinaryContext>
 		</div>
 
 		<div className="col-md-6 right">
@@ -94,11 +97,13 @@ class OutfitCard extends Component{
 			</div>
 			<div className="gallery">
 				<div className="row">
+					<CloudinaryContext cloudName="hccxvb0bt">
 					{images.map((image, index) => 
 					<div key={index} className="col-md-3">
-						 <img alt="outfit thumbnail" className="img-responsive" key={index} src={'data:' + image.contentType + ';base64, ' + image.base64} onClick={() => this.setImageFocus(index)} />
+						<Image publicId={image.public_id}  className="img-responsive" key={index} onClick={() => this.setImageFocus(index)} />
 					</div>
 					)}
+					</CloudinaryContext>
 				</div>
 			</div>
 		</div>

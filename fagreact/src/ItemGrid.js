@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
+import {Image, CloudinaryContext} from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 import Client from './Client.js';
 import Masonry from 'react-masonry-component';
@@ -87,7 +88,9 @@ render() {
       <div className="dynamicItem" key={index}>
       <Link className="link-item" to={`/outfit/` + item._id} >
         <div className="editor-item">
-          <img alt="outfit" className="img-item" src={'data:' + item.images[0].contentType + ';base64, ' + item.images[0].base64}/>
+        <CloudinaryContext cloudName="hccxvb0bt">
+          <Image alt="outfit" className="img-item"  publicId={item.images[0].public_id}  />
+        </CloudinaryContext>
           <div className="like-button"><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
           {(item.tags.length > 0) ? 
           <div className="img-tags"><ul>

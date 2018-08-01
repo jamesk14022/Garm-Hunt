@@ -1,11 +1,13 @@
 import React from 'react';
+import {Image, CloudinaryContext} from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 
 const ReviewOutfitCard = ({ outfit, approvalCallback }) => (
 	<div className="ReviewOutfitCard">
-	
-		<img alt="outfit" className="img-responsive"
-		src={'data:' + outfit.images[0].contentType + ';base64, ' + outfit.images[0].base64}/>
+		
+		<CloudinaryContext cloudName="hccxvb0bt">
+			<Image alt="outfit" className="img-item img-responsive"  publicId={outfit.images[0].public_id}  />
+		</CloudinaryContext>
 
 		<ul>
 			<li>{outfit.images.length} images</li>
