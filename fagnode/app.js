@@ -80,9 +80,11 @@ const userSchema = new mongoose.Schema({
 	email: String
 });
 
-let db;
-db.outfits = mongoose.model('Outfit', outfitSchema);
-db.users = mongoose.model('User', userSchema);
+let db = {
+	outfits: mongoose.model('Outfit', outfitSchema),
+	users: mongoose.model('User', userSchema)
+}
+
 app.db = db;
 
 app.use('/api', api);
