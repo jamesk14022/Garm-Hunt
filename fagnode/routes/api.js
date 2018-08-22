@@ -86,7 +86,7 @@ router.post('/user', function(req, res){
 	const db = req.app.db;
 
 	let { id, name } = req.body;
-	let userData = new User();
+	let userData = new db.users();
 	userData.facebook_id = id;
 	userData.full_name = name;
 
@@ -161,7 +161,7 @@ router.post('/outfit', function(req, res){
 //works on all outfits
 router.delete('/outfits/:outfitId', function(req, res){
 	const db = req.app.db;
-	
+
 	db.outfits.findOneAndRemove({ _id: req.params.outfitId }, function(err, response){
 		if (err) console.log(err);
 	});
