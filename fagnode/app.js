@@ -87,6 +87,7 @@ let db = {
 
 app.db = db;
 
+const api = require('./routes/api');
 app.use('/api', api);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
