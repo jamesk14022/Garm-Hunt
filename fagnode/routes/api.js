@@ -13,6 +13,16 @@ router.get('/outfits/:outfitId', function(req, res){
 	);
 });
 
+//returns all tags 
+router.get('/tags/', function(req, res){
+	const db = req.app.db;
+
+	db.outfits.distinct('tags.tag', function(err, tags){
+		if (err) return console.log(err);
+		res.json(tags);
+	});
+});
+
 //returns an array of outfits based on tag
 router.get('/tags/outfits/:tag', function(req, res){
 	const db = req.app.db;
@@ -100,7 +110,6 @@ router.post('/user', function(req, res){
 	});
 
 	res.end();
-
 });
 
 //post a new outfit to the app
@@ -134,7 +143,7 @@ router.post('/outfit', function(req, res){
 	var userOutfit = new db.outfits();
 	userOutfit._id = req.ui;
 	userOutfit.images = images;
-	userOutfit.author = { id: req.body.userID, fullName: 'eg' };
+	userOutfit.author = { id: req.body.userID, fullName: 'James Kingsbury' };
 	userOutfit.date = Date.now();
 	userOutfit.items = items;
 	userOutfit.model = { name: req.body.modelName, url: req.body.modelLink};
