@@ -115,7 +115,7 @@ router.post('/user', function(req, res){
 //post a new outfit to the app
 router.post('/outfit', function(req, res){
 	const db = req.app.db;
-	req.ui = shortid();
+	req.ui = req.app.ui;
 
 	upload(req, res, function (err) {
     if (err) {
@@ -141,7 +141,7 @@ router.post('/outfit', function(req, res){
 	}
 
 	var userOutfit = new db.outfits();
-	userOutfit._id = req.ui;
+	userOutfit._id = req.ui();
 	userOutfit.images = images;
 	userOutfit.author = { id: req.body.userID, fullName: 'James Kingsbury' };
 	userOutfit.date = Date.now();

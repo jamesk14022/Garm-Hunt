@@ -86,6 +86,7 @@ let db = {
 }
 
 app.db = db;
+app.ui = shortid;
 
 const api = require('./routes/api');
 app.use('/api', api);
