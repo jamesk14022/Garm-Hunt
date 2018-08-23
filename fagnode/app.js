@@ -87,6 +87,7 @@ let db = {
 
 app.db = db;
 app.ui = shortid;
+app.upload = multer;
 
 const api = require('./routes/api');
 app.use('/api', api);

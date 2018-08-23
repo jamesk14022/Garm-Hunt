@@ -115,8 +115,10 @@ router.post('/user', function(req, res){
 //post a new outfit to the app
 router.post('/outfit', function(req, res){
 	const db = req.app.db;
+	const upload = req.app.upload;
 	req.ui = req.app.ui;
 
+	//multer tings
 	upload(req, res, function (err) {
     if (err) {
     	console.log(err);
