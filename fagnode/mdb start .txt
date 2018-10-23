@@ -1,3 +1,0 @@
-mongod --storageEngine=mmapv1 --dbpath C:\data
-
-from the monogodb/bin folder
