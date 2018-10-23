@@ -1,0 +1,105 @@
+.editor-item{
+	background-size: cover;
+	height: 200px;
+	padding: 20px;
+	position: relative;
+	background-color: #dbdbdb;
+}
+
+.fash-item{
+	background-size: cover;
+	height: 300px;
+	padding: 20px;
+	margin-top: 15px;
+	position: relative;
+	background-color: #dbdbdb;
+}
+
+.fash-item-info{
+	position: relative;
+	margin-bottom: 60px;
+}
+
+.fash-item-info p:first-child{
+	margin-top: 10px;
+
+}
+
+.fash-item-info p:first-child + p{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
+
+
+.fash-item-info p:first-child{
+	margin-left: 5px;
+}
+
+a{
+	color: black;
+}
+
+p{
+	color: black;
+}
+
+.feature{
+	background-size: cover;
+	height: 300px;
+	margin-top: 15px;
+	padding: 30px;
+	position: relative;
+	background-color: #dbdbdb;
+
+}
+
+.feature h3{
+	position: absolute;
+	left: 10px;
+	top: 80px;
+	color: white;
+    letter-spacing: 2px;  
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+} 
+
+ h2 span.spacer{
+	padding: 0 5px;
+}
+
+.glyphicon-heart{
+	font-size: 20px;
+	display: none; 
+}
+
+.fash-item:hover .glyphicon-heart{
+	display: block;
+}
+
+.glyphicon-heart:hover{
+	color: red;
+}
+
+.glyphicon-link{
+	font-size: 20px;
+	display: none;
+	margin-top: 15px;
+}
+
+.fash-item:hover .glyphicon-link{
+	display: block;
+}
+
+.glyphicon-link:hover{
+	color: red;
+}
+
+input.forn-control{
+	margin: 0px;
+}
+
+div.col-lg-12{
+	padding: 0px;
+	margin-bottom: 30px;
+}

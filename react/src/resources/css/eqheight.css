@@ -1,0 +1,13 @@
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+div.About .row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+
+  max-height: 350px;
+}
+

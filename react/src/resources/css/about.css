@@ -1,0 +1,22 @@
+div.About{
+	margin-top: 100px;
+	margin-bottom: 160px;
+}
+
+div.About h2{
+	text-decoration: underline solid #337ab7;
+}
+
+div.About p{
+	font-size: 20px;
+}
+
+div.about-photos{
+	margin-top: 25px;
+	padding-left: 25px;
+}
+
+div.about-photos div.col-md-6{
+	margin: 0px;
+	padding: 0px;
+}

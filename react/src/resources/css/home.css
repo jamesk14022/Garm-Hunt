@@ -1,0 +1,221 @@
+@media (min-width: 1350px) {
+    .container{
+        width: 1400px;
+    }
+}
+
+div.Home div.container-fluid{
+	margin: 0px 40px;
+}
+
+div.row{
+	margin: 0px;
+}
+
+
+div.learn{
+	margin-top: 50px;
+}
+
+div.learn a{
+	font-size: 23px;
+}
+
+div.learn a:link{
+	text-decoration: underline solid #337ab7;
+}
+
+div.learn a:active{
+	text-decoration: underline solid #337ab7;
+}
+
+div.learn a:visited{
+	text-decoration: underline solid #337ab7;
+}
+
+div.feature-row{
+	margin-top: 80px;
+	margin-bottom: 40px;
+}
+
+div.search-bar{
+	padding: 0px 15px;
+}
+
+h2.grid-heading{
+	margin-bottom: 0px;
+}
+
+div.Home div.container{
+	margin-top: 60px;
+}
+
+div.container-footer{
+	margin: 0px 200px;
+	margin-top: 20px;
+	padding: 0px;
+}
+
+div#email-funnel{
+	text-align: center;
+	border: .5px solid grey;
+	border-radius: 5px;
+	padding: 10px 10px;
+	margin-top: 5px;
+	min-height: 200px;
+	position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 75px;	
+}
+
+div#email-funnel input{
+	display: block;
+	margin-top: 20px;
+}
+
+div#email-funnel input::-webkit-input-placeholder {
+   text-align: center;
+}
+
+div#email-funnel input:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+div#email-funnel input::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+div#email-funnel input:-ms-input-placeholder {  
+   text-align: center; 
+}
+
+div#email-funnel button{
+	margin-top: 20px;
+}
+
+/*makes all column heights within row equal*/
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.fash-item{
+	background-size: cover;
+	height: 300px;
+	padding: 20px;
+	margin-top: 15px;
+	position: relative;
+	background-color: #dbdbdb;
+}
+
+.fash-item-info{
+	position: relative;
+	margin-bottom: 60px;
+}
+
+.fash-item-info p:first-child{
+	margin-top: 10px;
+
+}
+
+.fash-item-info p:first-child + p{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
+
+
+.fash-item-info p:first-child{
+	margin-left: 5px;
+}
+
+a{
+	color: black;
+}
+
+p{
+	color: black;
+}
+
+div.explain{
+	height: 410px;
+	padding: 30px;
+	background-color: #eee
+}
+
+div.explain ul{
+	list-style: none;
+}
+
+div.explain h3:before {    
+	font-family: 'FontAwesome';
+	content: '\f06e';
+	margin-right:10px;
+	color: grey;
+}
+
+div.explain h3.discover:before {    
+	content: '\f06e';
+}
+
+div.explain h3.promote:before {    
+	content: '\f0a1';
+}
+
+div.explain h3.share:before {    
+	content: '\f0c0';
+}
+
+.feature{
+	z-index: -1;
+	background-size: cover;
+	height: 410px;
+	margin: 0px;
+	padding: 0px 40px;
+	position: relative;
+	background-image: url('/f2.jpg');
+	background-color: #dbdbdb;
+}
+
+.feature h3{
+	position: absolute;
+	left: 10px;
+	top: 80px;
+	z-index: 2;
+	color: white;
+    letter-spacing: 2px;  
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+} 
+
+h2 span.spacer{
+	padding: 0 5px;
+}
+
+input.forn-control{
+	margin: 0px;
+}
+
+div.col-lg-12{
+	padding: 0px;
+	margin-bottom: 30px;
+}
+
+div.row-eq-height div.col-md-10{
+	padding: 0px;
+}
+
+div.col-md-2, div.col-md-4, div.col-md-8, div.col-sm-12{
+	padding: 0px;
+}
+
+div.col-md-10 hr{
+	margin-right: 65px;
+}
+
+div.Home hr{
+	height: 2px;
+	margin-top: 10px; 
+}

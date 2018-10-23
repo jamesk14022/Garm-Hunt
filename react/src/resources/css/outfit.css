@@ -1,0 +1,169 @@
+div .main-content{
+	padding-top: 100px;
+}
+
+div.Outfit div.container-fluid{
+	margin: 0px 150px;
+}
+
+div.OutfitCard div.left{
+	padding: 0px;
+}
+
+div.OutfitCard div.right{
+	background-color: #eee;
+	padding: 15px;
+}
+
+div.gallery{
+	padding-top: 15px;
+}
+
+div.gallery div.col-md-3{
+	padding: 0px 7px 0px 0px;
+}
+
+#item-details{
+	position: relative;
+	width: 100%;
+	padding: 0px;
+}
+
+ul.item-list{
+	width: 100%;
+}
+
+li.item{
+	border-bottom: 1px solid black;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+
+#item-misc{
+	position: relative;
+	height: 70px;
+}
+
+div.col-md-6.tag{
+	padding-left: 0px;
+}
+
+div.col-md-6.social{
+	padding-right: 5px;
+	text-align: right;
+}
+
+.social-buttons{
+	
+	display: inline;
+	font-size: 32px;
+	margin-left: 20px;
+}
+
+.social-buttons .glyphicon-heart{
+	display: inline;
+	font-size: 30px;
+	text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black;
+	margin-right: 0px;
+}
+
+/*forces the model and profile columns to be of equal height */
+.row.equal {
+display: flex;
+flex-wrap: wrap;
+}
+
+div#author{
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	min-height: 60px;
+}
+
+#people{
+	width: 100%;
+}
+
+h1{
+	margin-top: 100px;
+}
+
+.fash-item{
+	background-size: contain;
+	height: 300px;
+	padding: 30px;
+	background: url('/imgs/shoe.jpg');
+}
+
+.fash-item-info{
+	position: relative;
+}
+
+.fash-item-info p:first-child{
+	margin-top: 10px;
+
+}
+
+.fash-item-info p:first-child + p{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
+
+.fash-item-info p:first-child, .fash-item-info p:first-child + p + p{
+	margin-left: 5px;
+}
+
+.suggested-items{
+	margin-top: 60px;
+	
+}
+
+ul.item-list{
+	padding: 0px;
+	list-style-type: none;
+	margin: 30px 0px 50px 0px;
+}
+
+i.fa-arrow-right{
+	float: right;
+	margin-left: 20px;
+}
+
+i.fa-label{
+	margin-right: 10px;
+}
+
+/*profile styles start
+*/
+
+div.tags{
+	padding: 7px 0px;
+	font-size: 19px;
+}
+
+p.item-tag{
+	background-color: #E1ECF4;
+	color: #39739d;
+	padding: 5px;
+	display: inline;
+	margin-right: 5px;
+}
+
+div#people .col-md-6{
+	padding: 0px;
+}
+
+div#model, div#author{
+	max-width: 210px;
+}
+
+div#model a:active, div#model a:visited, div#model a:link{
+	text-decoration: underline solid #337ab7;
+}
+
+div#author a:active, div#author a:visited, div#author a:link{
+	text-decoration: underline solid #337ab7;
+}
+
+/*profile styles end */

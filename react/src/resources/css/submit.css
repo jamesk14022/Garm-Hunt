@@ -1,0 +1,52 @@
+div.Submit{
+	margin-top: 100px;
+}
+
+button.btn-submit{
+	margin-top: 20px;
+	float: right;
+}
+
+sup{
+	font-size: 18px;
+	color: red;
+}
+
+p.dropzone-text{
+	align-self: center;
+}
+
+.tag-input{
+	margin-top: 10px;
+}
+
+.enteredTags{
+	background-color: #ededed;
+	padding: 5px;
+	border-radius: 3px;
+	font-size: 18px;
+	margin-right: 5px;
+}
+
+.removeTag{
+	margin-left: 5px;
+}
+
+p.errors{
+	color: red;
+	font-size: 16px;
+}
+
+div#tips h3{
+    text-decoration: underline solid #337ab7;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+div#tips p{
+	font-size: 25px;
+}
+
+div#tips li{
+	margin-bottom: 5px;
+}

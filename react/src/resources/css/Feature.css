@@ -1,0 +1,17 @@
+div.Feature{
+	margin-top: 90px;
+}
+
+p.article-pretext{
+	font-size: 19px;
+	margin-bottom: 30px;
+
+}
+
+div.Feature h2{
+	text-decoration: underline solid #337ab7;
+}
+
+div.feature-item{
+	margin-bottom: 50px;
+}

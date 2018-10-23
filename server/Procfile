@@ -1,0 +1,2 @@
+web: cd fagnode && node app.js
+

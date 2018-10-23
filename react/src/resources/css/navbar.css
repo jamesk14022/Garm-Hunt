@@ -1,0 +1,57 @@
+@font-face{
+  font-family: Couture;
+  src: url("../fonts/couture-bld.otf") format("opentype");
+  font-weight: 200;
+}
+
+@font-face{
+	font-family: HelveticaBO;
+	src: url("../fonts/Helvetica-BlackOblique.woff") format("woff");
+  	font-weight: 100;
+}
+/*
+a.navbar-brand{
+	font-family: Couture;
+}
+
+ul.navbar-nav{
+	font-family: Couture;
+}
+*/
+nav.navbar{
+	padding: .3% 3%;
+}
+
+nav.navbar-default a.navbar-brand{
+	font-size: 34px;
+	color: #000;
+	font-family: HelveticaBO;
+}
+
+a.navbar-brand sub{
+	font-family: Helvetica;
+	font-size: 22px;
+	margin-left: 5px;
+}
+
+nav.navbar button{
+	color: #000;
+	font-size: 17px;
+}
+
+nav.navbar-default{
+	background-color: white;
+}
+
+.nav-link-right:hover{
+	text-decoration: underline;
+}
+
+.no-button{
+	border: none;
+	background: none;
+}
+
+.link-fade{
+	transition: opactity 0.5s;
+}
